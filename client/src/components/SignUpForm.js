@@ -2,9 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react'
 
-function SignInForm({ setErrors, setUser }) {
-
-    const [formData, setFormData] = useState({username: "", password: ""})
+function SignUpForm({ setUser, setErrors }){
+    const [formData, setFormData] = useState({username: "", password: "", password_confirmation: ""})
 
     function handleFormChange(e){
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -12,7 +11,7 @@ function SignInForm({ setErrors, setUser }) {
 
     function handleFormSubmit(e){
         e.preventDefault()
-        fetch("/signin", {
+        fetch("/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -42,14 +41,16 @@ function SignInForm({ setErrors, setUser }) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" name="password" value={formData?.password} onChange={handleFormChange} />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password Confirmation</Form.Label>
+            <Form.Control type="password" placeholder="Password" name="password_confirmation" value={formData?.password_confirmation} onChange={handleFormChange} />
         </Form.Group>
+        
         <Button variant="primary" type="submit">
             Submit
         </Button>
         </Form>
     );
 }
-
-export default SignInForm;
+export default SignUpForm;
