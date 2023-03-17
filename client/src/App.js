@@ -1,37 +1,42 @@
 import { useState, useEffect } from "react";
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, useHistory } from 'react-router-dom'
 import SignInComponent from "./components/SignInComponent";
 import SignUpComponent from "./components/SignUpComponent";
+import LandingPage from "./components/LandingPage"
 import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import { useAutoLogInQuery } from './app/services/userAPI'
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [user, setUser] = useState({})
+  const history = useHistory()
+  const {data, 
+    isLoading,
+    isSuccess,
+    isError,
+    error} = useAutoLogInQuery()
+  console.log(data)
 
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
+  let content
 
-  function handleLogout(e){
-    fetch('/logout', {method: "DELETE"})
-    .then(r => {
-      console.log("user logged out", r.ok)
-      setUser({})
-    })
+  if(isSuccess){
+    history.push('/home')
   }
-
+  
   return (
     <div className="App">
-      {/* <h1>Page Count: {count}</h1> */}
-      <NavBar handleLogout={handleLogout}/>
+      <NavBar />
       <Switch>
+        <Route exact path='/'>
+          <LandingPage />
+        </Route>
         <Route exact path="/signin">
-          <SignInComponent setUser={setUser}/>
+          <SignInComponent />
         </Route>
         <Route exact path="/signup">
-          <SignUpComponent setUser={setUser}/>
+          <SignUpComponent />
+        </Route>
+        <Route exact path="/home">
+          <Home />
         </Route>
       </Switch>      
     </div>
