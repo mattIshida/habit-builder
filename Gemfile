@@ -62,3 +62,5 @@ gem "stripe", "~> 8.3"
 
 gem 'dotenv-rails', groups: [:development, :test]
 
+
+gem "whenever", "~> 1.0"
