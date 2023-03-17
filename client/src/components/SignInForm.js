@@ -1,10 +1,21 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react'
+import { useHistory} from 'react-router-dom'
+import { useSignInMutation } from '../app/services/userAPI'
+import { useSelector } from 'react-redux'
+import Alert from 'react-bootstrap/Alert'
 
-function SignInForm({ setErrors, setUser }) {
+function SignInForm() {
 
+    const history = useHistory()
     const [formData, setFormData] = useState({username: "", password: ""})
+    const [signIn, {
+        data, 
+        isLoading, 
+        isSuccess, 
+        isError, 
+        error}] = useSignInMutation()
 
     function handleFormChange(e){
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -12,22 +23,15 @@ function SignInForm({ setErrors, setUser }) {
 
     function handleFormSubmit(e){
         e.preventDefault()
-        fetch("/signin", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(r => {
-            if(r.ok){
-                r.json().then(res => setUser(res))
-            } else {
-                r.json().then(res => setErrors(res.errors))
-            }
-        })
+        signIn(formData)        
     }
 
+    let content
+    if(isSuccess) history.push('/home')
+    if(isError) {
+        content = error.data.errors.map(e => <Alert variant="danger">{e}</Alert>)
+    }  
+    
     return (
         <Form onSubmit={handleFormSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -48,6 +52,7 @@ function SignInForm({ setErrors, setUser }) {
         <Button variant="primary" type="submit">
             Submit
         </Button>
+        {content}
         </Form>
     );
 }

@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   get '/hello', to: 'application#hello_world'
   post '/signin', to: 'sessions#create'
-  delete '/logout', to: 'session#destroy'
+  delete '/logout', to: 'sessions#destroy'
   post '/signup', to: 'users#create'
-  get '/autologin', to: 'users#show'
+  get '/me', to: 'users#show'
 
 end
