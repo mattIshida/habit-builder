@@ -57,3 +57,8 @@ end
 gem "active_model_serializers", "~> 0.10.13"
 
 gem "faker", "~> 3.1"
+
+gem "stripe", "~> 8.3"
+
+gem 'dotenv-rails', groups: [:development, :test]
+
