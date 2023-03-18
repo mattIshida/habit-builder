@@ -5,6 +5,7 @@ import SignUpComponent from "./components/SignUpComponent";
 import LandingPage from "./components/LandingPage"
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
+import Timer from "./components/Timer";
 import { useAutoLogInQuery } from './app/services/userAPI'
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
@@ -75,6 +76,9 @@ function App() {
           </Route>
           <Route exact path="/home">
             <Home />
+          </Route>
+          <Route path='/timer'>
+            <Timer seconds={10}/>
           </Route>
         </Switch> 
         </Elements>

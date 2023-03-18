@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from '../features/userSlice'
+import timerReducer from '../features/timerSlice'
 import { userApi } from './services/userAPI'
 
 // import budgetReducer from '../features/budget/budgetSlice'
@@ -18,7 +19,7 @@ export const store = configureStore({
 
     reducer: {
         //user: userReducer
-        // budget: budgetReducer,
+        timer: timerReducer,
         // // pets: petsReducer
         [userApi.reducerPath]: userApi.reducer,
         // [dogsApi.reducerPath]: dogsApi.reducer
