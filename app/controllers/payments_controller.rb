@@ -22,6 +22,7 @@ skip_before_action :authorize, only: :create
     
         payment_intent = Stripe::PaymentIntent.create(
             amount: calculate_order_amount(data['items']),
+            metadata: data['metadata'],
             currency: 'usd',
             payment_method_types: ['card']
             # ,
