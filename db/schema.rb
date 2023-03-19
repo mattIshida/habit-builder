@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_231211) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_19_232739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_231211) do
     t.datetime "updated_at", null: false
     t.integer "challenge", default: 1
     t.integer "challenge_set", default: 1
+    t.integer "tier", default: 0
   end
 
 end

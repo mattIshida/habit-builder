@@ -30,6 +30,8 @@ class WebhooksController < ApplicationController
         case event.type
         when 'payment_intent.succeeded'
             payment_intent = event.data.object # contains a Stripe::PaymentIntent
+            user = User.find(payment_intent[:metadata][:id])
+            user.update(tier: 1)
             puts 'PaymentIntent was successful!'
         when 'payment_method.attached'
             payment_method = event.data.object # contains a Stripe::PaymentMethod

@@ -9,8 +9,8 @@ import Timer from "./components/Timer";
 import CheckoutPage from "./components/CheckoutPage";
 import Upgrade from "./components/Upgrade";
 import { useAutoLogInQuery } from './app/services/userAPI'
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+// import {Elements} from '@stripe/react-stripe-js';
+// import {loadStripe} from '@stripe/stripe-js';
 
 // const stripePromise = loadStripe('pk_test_51Mmi4TGX9v97gt2cUREGXSOJ7Kz19oOGSLoMCyDpIf6ni0vfUxife1kHJ54rtcuy7NfS1TFDbOj3HusNz6URbZDK002kPsKN77');
 
@@ -56,9 +56,9 @@ function App() {
 
   let content
 
-  if(isSuccess){
-    history.push('/home')
-  }
+  // if(isSuccess){
+  //   history.push('/home')
+  // }
   
   return (
     
