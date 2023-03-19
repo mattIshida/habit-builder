@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
 
   post '/create-payment-intent', to: 'payments#create'
+  post '/webhook', to: 'webhooks#create'
 
 end
