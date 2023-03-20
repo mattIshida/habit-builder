@@ -34,6 +34,7 @@ function NavBar() {
                 <Nav.Link href="/timer">Timer</Nav.Link>
                 <Nav.Link href="/checkout">Checkout</Nav.Link>
                 <Nav.Link href="/upgrade">Upgrade</Nav.Link>
+                <Nav.Link href="/share">Share</Nav.Link>
             </Nav>
             <Navbar.Collapse id="navbar-dark-example">
             <Nav>

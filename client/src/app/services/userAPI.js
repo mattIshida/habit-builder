@@ -5,7 +5,7 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: ''
     }),
-    tagTypes: ['User', 'Attempt'],
+    tagTypes: ['User', 'Attempt', 'Intention'],
     endpoints(builder){
         return {
             signIn: builder.mutation({
@@ -52,6 +52,14 @@ export const userApi = createApi({
                     method: 'GET',
                 }),
                 providesTags: ['Attempt']
+            }),
+            postIntention: builder.mutation({
+                query: (formData) => ({
+                    url: '/intentions',
+                    method: 'POST',
+                    body: formData
+                }),
+                providesTags: ['Intention']
             })
         }
 
@@ -66,4 +74,5 @@ export const {
     useLogOutMutation, 
     useReportAttemptMutation,
     useGetAttemptsQuery,
+    usePostIntentionMutation
 } = userApi
