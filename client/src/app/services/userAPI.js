@@ -37,6 +37,13 @@ export const userApi = createApi({
                     method: 'DELETE',
                 }),
                 invalidatesTags: ['User']
+            }),
+            reportAttempt: builder.mutation({
+                query: (id, data) => ({
+                    url: `/attempts/${id}`,
+                    method: 'PATCH',
+                    body: data
+                })
             })
         }
 
@@ -44,4 +51,4 @@ export const userApi = createApi({
 
 })
 
-export const { useSignInMutation, useSignUpMutation, useAutoLogInQuery, useLogOutMutation} = userApi
+export const { useSignInMutation, useSignUpMutation, useAutoLogInQuery, useLogOutMutation, useReportAttemptMutation} = userApi

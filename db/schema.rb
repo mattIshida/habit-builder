@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_19_232739) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_002432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attempts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "challenge_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean "success"
+    t.integer "seq"
+    t.boolean "active"
+    t.boolean "current"
+    t.boolean "deadlined"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_attempts_on_challenge_id"
+    t.index ["user_id"], name: "index_attempts_on_user_id"
+  end
+
+  create_table "challenges", force: :cascade do |t|
+    t.integer "set"
+    t.integer "number"
+    t.integer "length"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -24,4 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_19_232739) do
     t.integer "tier", default: 0
   end
 
+  add_foreign_key "attempts", "challenges"
+  add_foreign_key "attempts", "users"
 end
