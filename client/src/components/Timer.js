@@ -38,7 +38,8 @@ function Timer({seconds}){
                 <Button>No</Button>
             </div> :
             <Button onClick={handleButtonClick}>{active ? 'Pause' : 'Start'}</Button>
-            }
+            // <Button onClick={handleButtonClick}>{active ? 'Pause' : 'Start'}</Button>
+        }
         </div>
     )
 }
