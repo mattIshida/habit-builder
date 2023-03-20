@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Timer from "./components/Timer";
 import CheckoutPage from "./components/CheckoutPage";
 import Upgrade from "./components/Upgrade";
+import SharePage from "./components/SharePage";
 import { useAutoLogInQuery } from './app/services/userAPI'
 // import {Elements} from '@stripe/react-stripe-js';
 // import {loadStripe} from '@stripe/stripe-js';
@@ -87,6 +88,9 @@ function App() {
             </Route>
             <Route path='/upgrade'>
               <Upgrade />
+            </Route>
+            <Route path='/share'>
+              <SharePage />
             </Route>
           </Switch> 
         {/* </Elements> */}

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
     has_many :attempts, dependent: :destroy
+    has_many :intentions, dependent: :destroy
 
     def self.increment_challenge
         puts "increment running"

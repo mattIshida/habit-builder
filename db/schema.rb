@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_164439) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_221837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_164439) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "intentions", force: :cascade do |t|
+    t.string "where"
+    t.string "what"
+    t.string "when"
+    t.string "image"
+    t.text "note"
+    t.bigint "user_id", null: false
+    t.bigint "attempt_id", null: false
+    t.datetime "time"
+    t.boolean "success"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attempt_id"], name: "index_intentions_on_attempt_id"
+    t.index ["user_id"], name: "index_intentions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -52,4 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_164439) do
 
   add_foreign_key "attempts", "challenges"
   add_foreign_key "attempts", "users"
+  add_foreign_key "intentions", "attempts"
+  add_foreign_key "intentions", "users"
 end
