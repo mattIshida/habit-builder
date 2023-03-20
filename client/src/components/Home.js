@@ -1,5 +1,8 @@
-import { useAutoLogInQuery } from "../app/services/userAPI";
+import { useAutoLogInQuery, useGetAttemptsQuery } from "../app/services/userAPI";
 import { useHistory } from 'react-router-dom'
+import ChallengeCardMain from "./ChallengeCardMain";
+import Timer from "./Timer"
+import { current } from "@reduxjs/toolkit";
 
 function Home(){
     const history = useHistory()
@@ -11,15 +14,32 @@ function Home(){
         error
       } = useAutoLogInQuery()
 
+    const {
+        data: attemptData,
+        isLoading: attemptIsLoading,
+        isSuccess: attemptIsSuccess,
+        isError: attemptIsError,
+        error: attemptError
+    } = useGetAttemptsQuery()
+    
+    console.log("attemptData", attemptData)
+
     let content
+    // const currentAttempt = attemptData?.find((a)=>a.current)
+
 
     if (isLoading) {
         console.log('isLoading')
         content = ""
-    } else if (isSuccess) {
+    } else if (isSuccess & attemptIsSuccess) {
         console.log('isSuccess')
-
-        content = <h2>{`Welcome, ${data.username}`}</h2>//posts.map(post => <PostExcerpt key={post.id} post={post} />)
+        const currentAttempt = attemptData.find((a)=>a.current)
+        content = (<div>
+            <h2>{`Welcome, ${data.username}`}</h2>
+            <ChallengeCardMain currentAttempt={currentAttempt}/>
+        </div>)
+        
+        //posts.map(post => <PostExcerpt key={post.id} post={post} />)
     } else if (isError) {
         console.log('isError')
         content = <div>{error.data.errors}</div>

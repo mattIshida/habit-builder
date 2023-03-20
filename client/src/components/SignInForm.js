@@ -9,7 +9,7 @@ import Alert from 'react-bootstrap/Alert'
 function SignInForm() {
 
     const history = useHistory()
-    const [formData, setFormData] = useState({username: "", password: ""})
+    const [formData, setFormData] = useState({username: "", password: "", utc_offset: -(new Date().getTimezoneOffset())})
     const [signIn, {
         data, 
         isLoading, 

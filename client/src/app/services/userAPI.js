@@ -5,7 +5,7 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: ''
     }),
-    tagTypes: ['User'],
+    tagTypes: ['User', 'Attempt'],
     endpoints(builder){
         return {
             signIn: builder.mutation({
@@ -39,11 +39,19 @@ export const userApi = createApi({
                 invalidatesTags: ['User']
             }),
             reportAttempt: builder.mutation({
-                query: (id, data) => ({
+                query: ({id, ...patch}) => ({
                     url: `/attempts/${id}`,
                     method: 'PATCH',
-                    body: data
-                })
+                    body: patch
+                }),
+                invalidatesTags: ['Attempt']
+            }),
+            getAttempts: builder.query({
+                query: () => ({
+                    url: `/attempts`,
+                    method: 'GET',
+                }),
+                providesTags: ['Attempt']
             })
         }
 
@@ -51,4 +59,11 @@ export const userApi = createApi({
 
 })
 
-export const { useSignInMutation, useSignUpMutation, useAutoLogInQuery, useLogOutMutation, useReportAttemptMutation} = userApi
+export const { 
+    useSignInMutation, 
+    useSignUpMutation, 
+    useAutoLogInQuery, 
+    useLogOutMutation, 
+    useReportAttemptMutation,
+    useGetAttemptsQuery,
+} = userApi
