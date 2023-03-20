@@ -3,12 +3,14 @@ class UsersController < ApplicationController
 
     # auto login
     def show
+        # @user.update(utc_offset: params[:utc_offset])
         render json: @user, status: :ok
     end
 
     #sign up
     def create
         @user = User.create!(user_params)
+        @user.generate_first_attempt
         session[:user_id] = @user.id
         render json: @user, status: :created
     end
@@ -16,7 +18,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :password, :password_confirmation)
+        params.permit(:username, :password, :password_confirmation, :utc_offset)
     end
 
 end

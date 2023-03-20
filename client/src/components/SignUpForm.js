@@ -8,7 +8,7 @@ import { useSignUpMutation } from '../app/services/userAPI'
 function SignUpForm(){
 
     const history = useHistory()
-    const [formData, setFormData] = useState({username: "", password: "", password_confirmation: ""})
+    const [formData, setFormData] = useState({username: "", password: "", password_confirmation: "", utc_offset: -(new Date().getTimezoneOffset())})
     const [signUp, {
         data, 
         isLoading, 
