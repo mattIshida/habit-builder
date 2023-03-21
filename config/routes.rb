@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :bookmarks
+  resources :follows
+  resources :tips
   resources :intentions
   resources :attempts
   resources :challenges

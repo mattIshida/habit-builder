@@ -60,6 +60,13 @@ export const userApi = createApi({
                     body: formData
                 }),
                 providesTags: ['Intention']
+            }),
+            getTips: builder.query({
+                query: (challenge_id) => ({
+                    url: `/tips/${challenge_id}`,
+                    method: 'GET',
+                }),
+                providesTags: ['Tips']
             })
         }
 
@@ -74,5 +81,6 @@ export const {
     useLogOutMutation, 
     useReportAttemptMutation,
     useGetAttemptsQuery,
-    usePostIntentionMutation
+    usePostIntentionMutation,
+    useGetTipsQuery
 } = userApi
