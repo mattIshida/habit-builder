@@ -9,6 +9,7 @@ import Timer from "./components/Timer";
 import CheckoutPage from "./components/CheckoutPage";
 import Upgrade from "./components/Upgrade";
 import SharePage from "./components/SharePage";
+import BrowseReaders from "./components/BrowseReaders"
 import { useAutoLogInQuery } from './app/services/userAPI'
 // import {Elements} from '@stripe/react-stripe-js';
 // import {loadStripe} from '@stripe/stripe-js';
@@ -91,6 +92,9 @@ function App() {
             </Route>
             <Route path='/share'>
               <SharePage />
+            </Route>
+            <Route path='/readers'>
+              <BrowseReaders />
             </Route>
           </Switch> 
         {/* </Elements> */}

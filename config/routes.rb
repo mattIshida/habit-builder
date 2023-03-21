@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   post '/create-payment-intent', to: 'payments#create'
   post '/webhook', to: 'webhooks#create'
 
+  get 'readers', to: 'users#index'
+  get 'readers/:id', to: 'users#reader'
+
 end

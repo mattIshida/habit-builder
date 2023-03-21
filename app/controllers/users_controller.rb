@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
     skip_before_action :authorize, only: [:create]
 
+    def index
+        readers = User.all
+        render json: readers, status: :ok
+    end
+
     # auto login
     def show
         # @user.update(utc_offset: params[:utc_offset])
@@ -13,6 +18,11 @@ class UsersController < ApplicationController
         @user.generate_first_attempt
         session[:user_id] = @user.id
         render json: @user, status: :created
+    end
+
+    def reader
+        reader = User.find(params[:id])
+        render json: reader, status: :ok, serializer: ReaderSerializer
     end
 
     private

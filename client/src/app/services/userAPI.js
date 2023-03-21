@@ -5,7 +5,7 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: ''
     }),
-    tagTypes: ['User', 'Attempt', 'Intention'],
+    tagTypes: ['User', 'Attempt', 'Intention', 'Tips', 'Readers', 'Profile', 'Follows'],
     endpoints(builder){
         return {
             signIn: builder.mutation({
@@ -67,6 +67,28 @@ export const userApi = createApi({
                     method: 'GET',
                 }),
                 providesTags: ['Tips']
+            }),
+            getReaders: builder.query({
+                query: () => ({
+                    url: '/readers',
+                    methdo: 'GET'
+                }),
+                providesTags: ['Readers']
+            }), 
+            getReaderProfile: builder.query({
+                query: (id) => ({
+                    url: `/readers/${id}`,
+                    method: "GET"
+                }),
+                providesTags: ['Profile']
+            }),
+            postFollow: builder.mutation({
+                query: (followObj) => ({
+                    url: `/follows`,
+                    method: 'POST',
+                    body: followObj
+                }),
+                providesTags: ['Follows']
             })
         }
 
@@ -82,5 +104,8 @@ export const {
     useReportAttemptMutation,
     useGetAttemptsQuery,
     usePostIntentionMutation,
-    useGetTipsQuery
+    useGetTipsQuery,
+    useGetReadersQuery,
+    useGetReaderProfileQuery,
+    usePostFollowMutation
 } = userApi
