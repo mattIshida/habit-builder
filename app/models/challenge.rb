@@ -1,4 +1,6 @@
 class Challenge < ApplicationRecord
+    has_many :attempts, dependent: :destroy
+    has_many :tips, through: :attempts
 
     def next_challenge
         #self.set

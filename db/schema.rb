@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_221837) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_21_073116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,11 +30,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_221837) do
     t.index ["user_id"], name: "index_attempts_on_user_id"
   end
 
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "bookmarkable_id"
+    t.string "bookmarkable_type"
+    t.boolean "pinned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "challenges", force: :cascade do |t|
     t.integer "set"
     t.integer "number"
     t.integer "length"
     t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,6 +72,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_221837) do
     t.index ["user_id"], name: "index_intentions_on_user_id"
   end
 
+  create_table "tips", force: :cascade do |t|
+    t.string "text"
+    t.string "image"
+    t.bigint "user_id", null: false
+    t.bigint "attempt_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attempt_id"], name: "index_tips_on_attempt_id"
+    t.index ["user_id"], name: "index_tips_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -68,6 +96,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_221837) do
 
   add_foreign_key "attempts", "challenges"
   add_foreign_key "attempts", "users"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "intentions", "attempts"
   add_foreign_key "intentions", "users"
+  add_foreign_key "tips", "attempts"
+  add_foreign_key "tips", "users"
 end

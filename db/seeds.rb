@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.destroy_all
+Follow.destroy_all
 Challenge.destroy_all
 
 puts "Seeding users..."
@@ -17,6 +18,13 @@ puts "Seeding users..."
         challenge: (1..10).to_a.sample,
         challenge_set: 1
     )
+end
+
+puts "Seeding follows..."
+User.all.each do |u|
+    User.all.sample(5).each do |w|
+        Follow.create(follower: u, followed: w) unless u==w
+    end
 end
 
 "Seeding challenges..."

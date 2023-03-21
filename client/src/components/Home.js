@@ -29,11 +29,10 @@ function Home(){
 
 
     if (isLoading) {
-        console.log('isLoading')
         content = ""
     } else if (isSuccess & attemptIsSuccess) {
-        console.log('isSuccess')
         const currentAttempt = attemptData.find((a)=>a.current)
+        console.log(currentAttempt)
         content = (<div>
             <h2>{`Welcome, ${data.username}`}</h2>
             <ChallengeCardMain currentAttempt={currentAttempt}/>
@@ -41,14 +40,11 @@ function Home(){
         
         //posts.map(post => <PostExcerpt key={post.id} post={post} />)
     } else if (isError) {
-        console.log('isError')
         content = <div>{error.data.errors}</div>
         history.push('/signup')
     }
 
-    console.log('hello from home')
-    console.log('content', content)
-    console.log('error', error)
+
 
     return(
         <div>
