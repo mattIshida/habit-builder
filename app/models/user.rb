@@ -2,8 +2,12 @@ class User < ApplicationRecord
     has_secure_password
     has_many :attempts, dependent: :destroy
     has_many :intentions, dependent: :destroy
-    has_many :follows, foreign_key: :follower_id
-    has_many :followed_users, through: :follows, source: :followed 
+    has_many :tips, dependent: :destroy
+    has_many :follows, foreign_key: :follower_id, dependent: :destroy
+    has_many :followeds, foreign_key: :followed_id, class_name: "Follow", dependent: :destroy
+    has_many :followed_users, through: :follows, source: :followed
+    has_many :followers, through: :followeds, source: :follower
+    has_many :bookmarks, dependent: :destroy 
 
     def self.increment_challenge
         puts "increment running"

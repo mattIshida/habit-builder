@@ -8,8 +8,8 @@ function IntentionCardMain({ }){
     let content
 
     if(isSuccess){
-        if(!attempts.find(a => a.current).intention) content= null
-        const intention = attempts.find(a=> a.current).intention
+        if(!attempts.find(a => a.current).intentions[0]) content= null
+        const intention = attempts.find(a=> a.current).intentions[0]
         content = (
             <Card>
                 <Card.Title>Intention</Card.Title>
