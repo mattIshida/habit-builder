@@ -9,6 +9,7 @@ function IntentionCardMain({ }){
 
     if(isSuccess){
         if(!attempts.find(a => a.current).intentions[0]) content= null
+        else {
         const intention = attempts.find(a=> a.current).intentions[0]
         content = (
             <Card>
@@ -22,7 +23,7 @@ function IntentionCardMain({ }){
                     </ul>
                 </Card.Text>
             </Card>
-        )
+        )}
     }
 
 

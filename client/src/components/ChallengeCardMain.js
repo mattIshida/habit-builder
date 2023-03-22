@@ -6,8 +6,8 @@ import TipsPage from './TipsPage'
 function ChallengeCardMain({ currentAttempt }){
     const length = currentAttempt?.challenge?.length
     return(
-        <Card>
-            <Card.Title>Today's Challenge</Card.Title>
+        <Card className='rounded justify-content-center' style={{borderWidth: '2px'}}>
+            <Card.Title className="justify-content-center">Today's Challenge</Card.Title>
             <Card.Text>{`Read for ${length} ${length == 1 ? "minute" : "minutes"}`}
             <IntentionCardMain />
             <TipsPage />

@@ -35,4 +35,15 @@ class User < ApplicationRecord
         )
 
     end
+
+    def feed
+        ids = self.followed_users.pluck(:id)
+        ids.push(self.id)
+        feed_users = User.where(id: ids).map{|u| [u.id, u]}.to_h
+        intentions = Intention.where(user_id: ids).order(created_at: :desc).map{|item| {type: "intention", content: item, reader: feed_users[item[:user_id]]}}
+        attempts = Attempt.where(user_id: ids).order(created_at: :desc).map{|item| {type: "attempt", content: item, reader: feed_users[item[:user_id]]}}
+        tips = Tip.where(user_id: ids).order(created_at: :desc).map{|item| {type: "tip", content: item, reader: feed_users[item[:user_id]]}}
+        feed = [intentions, attempts, tips].flatten.compact
+        feed.sort!{|a,b| b[:content][:created_at]<=>a[:content][:created_at]}
+    end
 end

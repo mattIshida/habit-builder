@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_073116) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_003340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -92,6 +92,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_073116) do
     t.integer "challenge_set", default: 1
     t.integer "tier", default: 0
     t.integer "utc_offset", default: -300
+    t.integer "points", default: 0
+    t.integer "streak", default: 0
+    t.integer "level", default: 0
   end
 
   add_foreign_key "attempts", "challenges"

@@ -16,6 +16,8 @@ class AttemptsController < ApplicationController
     def update
         attempt = Attempt.find(params[:id])
         attempt.update!(success: params[:success])
+        @user.update(points: @user.points+10, streak: @user.streak+1) if attempt.success==true
+        @user.update(streak: 0) if attempt.success==false
         next_attempt = attempt.expire_and_new
 
         render json: attempt, status: :accepted

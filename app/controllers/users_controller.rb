@@ -12,6 +12,7 @@ class UsersController < ApplicationController
         render json: @user, status: :ok
     end
 
+
     #sign up
     def create
         @user = User.create!(user_params)
@@ -23,6 +24,11 @@ class UsersController < ApplicationController
     def reader
         reader = User.find(params[:id])
         render json: reader, status: :ok, serializer: ReaderSerializer
+    end
+
+    def feed
+        feed = @user.feed
+        render json: feed, status: :ok
     end
 
     private
