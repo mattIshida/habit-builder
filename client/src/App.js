@@ -10,7 +10,9 @@ import CheckoutPage from "./components/CheckoutPage";
 import Upgrade from "./components/Upgrade";
 import SharePage from "./components/SharePage";
 import BrowseReaders from "./components/BrowseReaders"
+import Feed from "./components/Feed"
 import { useAutoLogInQuery } from './app/services/userAPI'
+import { Container } from "react-bootstrap";
 // import {Elements} from '@stripe/react-stripe-js';
 // import {loadStripe} from '@stripe/stripe-js';
 
@@ -65,9 +67,12 @@ function App() {
   return (
     
       <div className="App">
+      <Container fluid="true" >
+
         {/* {clientSecret &&  */}
         {/* <Elements stripe={stripePromise} options={options}> */}
           <NavBar />
+          <Container className="col-md-8 col-lg-6 col-sm-10">
           <Switch>
             <Route exact path='/'>
               <LandingPage />
@@ -96,9 +101,14 @@ function App() {
             <Route path='/readers'>
               <BrowseReaders />
             </Route>
+            <Route path='/feed'>
+              <Feed />
+            </Route>
           </Switch> 
         {/* </Elements> */}
     {/* }      */}
+          </Container>
+      </Container>
       </div>
  
   );

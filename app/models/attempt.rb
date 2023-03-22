@@ -15,7 +15,7 @@ class Attempt < ApplicationRecord
 
   def self.expire_current_unattempted
       Attempt.where(success: nil, current: true).each do |a|
-          a.update(success: false, active: false, current: false)
+          a.update(success: false, active: false, current: false, streak: 0)
       end
   end
 

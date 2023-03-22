@@ -5,7 +5,7 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: ''
     }),
-    tagTypes: ['User', 'Attempt', 'Intention', 'Tips', 'Readers', 'Profile', 'Follows'],
+    tagTypes: ['User', 'Attempt', 'Intention', 'Tips', 'Readers', 'Profile', 'Follows', 'Feed'],
     endpoints(builder){
         return {
             signIn: builder.mutation({
@@ -44,7 +44,7 @@ export const userApi = createApi({
                     method: 'PATCH',
                     body: patch
                 }),
-                invalidatesTags: ['Attempt']
+                invalidatesTags: ['Attempt', 'User']
             }),
             getAttempts: builder.query({
                 query: () => ({
@@ -59,7 +59,7 @@ export const userApi = createApi({
                     method: 'POST',
                     body: formData
                 }),
-                providesTags: ['Intention']
+                providesTags: ['Intention', 'User']
             }),
             getTips: builder.query({
                 query: (challenge_id) => ({
@@ -89,6 +89,13 @@ export const userApi = createApi({
                     body: followObj
                 }),
                 providesTags: ['Follows']
+            }),
+            getFeed: builder.query({
+                query: () => ({
+                    url: '/feed',
+                    method: 'GET'
+                }), 
+                providesTags: ['Feed']
             })
         }
 
@@ -107,5 +114,6 @@ export const {
     useGetTipsQuery,
     useGetReadersQuery,
     useGetReaderProfileQuery,
-    usePostFollowMutation
+    usePostFollowMutation,
+    useGetFeedQuery
 } = userApi

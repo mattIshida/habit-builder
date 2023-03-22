@@ -1,4 +1,5 @@
 import {useStripe, useElements, PaymentElement, AddressElement} from '@stripe/react-stripe-js';
+import Button from 'react-bootstrap/Button'
 
 function CheckoutForm({ clientSecret }){
   const stripe = useStripe();
@@ -57,9 +58,9 @@ function CheckoutForm({ clientSecret }){
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <AddressElement options={{mode: 'billing'}} /> */}
+      <AddressElement options={{mode: 'billing'}} />
       <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
+      <Button disabled={!stripe}>Submit</Button>
     </form>
   )
 };

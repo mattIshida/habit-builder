@@ -9,7 +9,11 @@ class IntentionsController < ApplicationController
     end
 
     def create
+        if Intention.find_by(attempt_id: params[:attempt_id])
+            render json: {errors: ["Intention already posted"]}, status: :unprocessable_entity
+        end
         intention = Intention.create!(intention_params)
+        @user.update(points: @user.point+5)
         render json: intention, status: :created
     end
 

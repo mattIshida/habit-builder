@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import ChallengeCardMain from "./ChallengeCardMain";
 import Timer from "./Timer"
 import { current } from "@reduxjs/toolkit";
+import { Container } from "react-bootstrap";
 
 function Home(){
     const history = useHistory()
@@ -35,7 +36,9 @@ function Home(){
         console.log(currentAttempt)
         content = (<div>
             <h2>{`Welcome, ${data.username}`}</h2>
-            <ChallengeCardMain currentAttempt={currentAttempt}/>
+            <Container className='justify-content-center col-lg-6 col-md-7 col-sm-10 p-3'>
+                <ChallengeCardMain currentAttempt={currentAttempt}/>
+            </Container>
         </div>)
         
         //posts.map(post => <PostExcerpt key={post.id} post={post} />)
