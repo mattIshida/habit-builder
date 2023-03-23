@@ -4,12 +4,14 @@ import CheckoutForm from './CheckoutForm';
 import { useState, useEffect } from 'react'
 import { useAutoLogInQuery } from '../app/services/userAPI';
 import { useSelector } from 'react-redux'
+import CartDisplay from './CartDisplay';
 
 const stripePromise = loadStripe('pk_test_51Mmi4TGX9v97gt2cUREGXSOJ7Kz19oOGSLoMCyDpIf6ni0vfUxife1kHJ54rtcuy7NfS1TFDbOj3HusNz6URbZDK002kPsKN77');
 
 function CheckoutPage(){
 
     const [clientSecret, setClientSecret] = useState("");
+    const [amount, setAmount] = useState(0)
 
     const {
         data,
@@ -33,7 +35,7 @@ function CheckoutPage(){
             })
             .then((res) => res.json())
             .then((data) => {
-                console.log("clientSecret", data.clientSecret)
+                setAmount(data.amount)
                 setClientSecret(data.clientSecret)
             });
         }
@@ -49,10 +51,13 @@ function CheckoutPage(){
 
     return(
         <div>
-            {clientSecret && 
-            <Elements stripe={stripePromise} options={options}>
-                <CheckoutForm clientSecret={clientSecret}/>
-            </Elements>
+            {clientSecret && <>
+                <h2>Checkout and Payment</h2>
+                <CartDisplay amount={amount} item={cart} /> 
+                <Elements stripe={stripePromise} options={options}>
+                    <CheckoutForm clientSecret={clientSecret}/>
+                </Elements>
+            </>
             }
         </div>
     )

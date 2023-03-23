@@ -5,15 +5,19 @@ import NavLink from 'react-bootstrap/esm/NavLink';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAutoLogInQuery, useLogOutMutation } from '../app/services/userAPI';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { clearUser } from '../features/userSlice';
 
 function NavBar() {
 
     const [logOut, {data, isLoading, isSuccess, isError, error}] = useLogOutMutation()
     const {data: user, isSuccess: isSuccessUser, isError: isErrorUser} = useAutoLogInQuery()
     const history = useHistory()
+    const dispatch = useDispatch()
 
     function handleLogout(){
         logOut()
+        dispatch(clearUser())
         // history.push('/')
     }
 

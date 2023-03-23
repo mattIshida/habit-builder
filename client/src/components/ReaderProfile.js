@@ -9,13 +9,11 @@ import FollowerList from './FollowerList'
 function ReaderProfile(){
 
     const { id } = useParams()
-    console.log('id', id)
     const {data: profile, isSuccess} = useGetReaderProfileQuery(id)
 
     let content
 
     if(isSuccess){
-        console.log('profile', profile)
         content = (
             <div>
                 <h2>{profile.username}</h2>
