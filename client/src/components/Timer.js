@@ -1,32 +1,32 @@
 import { useEffect, useState } from 'react'
-import { toggleActive, expireTimer } from '../features/timerSlice'
+import { toggleActive, expireTimer, setTimer, decrementTimer, startTimer, resetTimer } from '../features/timerSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import Button from 'react-bootstrap/Button'
-import { useReportAttemptMutation } from '../app/services/userAPI'
+import { Button, Card } from 'react-bootstrap'
+import { useGetAttemptsQuery, useReportAttemptMutation } from '../app/services/userAPI'
 
-function Timer({ seconds, attempt_id, startable }){
+function Timer(){
 
-    const [time, setTime] = useState(seconds)
     const dispatch = useDispatch()
+    const {data: attempts, isSuccess} = useGetAttemptsQuery()
     const active = useSelector(state=> state.timer.active)
     const expired = useSelector(state => state.timer.expired)
-    const [reportAttempt, {
-        data, 
-        isLoading, 
-        isSuccess, 
-        isError, 
-        error}] = useReportAttemptMutation()
+    const seconds = useSelector(state=> state.timer.seconds)
+    const started = useSelector(state => state.timer.started)
 
-
-
-    function handleButtonClick(){
-        dispatch(toggleActive())
+    let currentAttempt, timerDuration, disabled
+    if(isSuccess){
+        currentAttempt = attempts.find(a => a.current)
+        timerDuration = currentAttempt.challenge.length*60
+        disabled = currentAttempt.active == false
     }
 
     useEffect(()=>{
+        dispatch(setTimer(timerDuration))
+    },[])
 
+    useEffect(()=>{
         const interval = setInterval(()=> {
-            if(active && !expired) setTime(prev=> prev-1)}, 
+            if(active && !expired) dispatch(decrementTimer())}, 
             1000)
 
         return ()=> {
@@ -34,32 +34,24 @@ function Timer({ seconds, attempt_id, startable }){
         }
     },[active, expired])
 
-    const hmsString = new Date(time * 1000).toISOString().slice(11, 19);
+    if(seconds==0) dispatch(expireTimer())
 
-    if(time==0) dispatch(expireTimer())
-
-
-    function handleClickReport(e){
-        console.log("value", e.target.value)
-        console.log("value", typeof e.target.value)
-        console.log({success: e.target.value === 'success'})
-        reportAttempt({id: attempt_id, success: e.target.value === 'success'})
+    function handleButtonClick(){
+        dispatch(startTimer())
+        dispatch(toggleActive())
     }
 
-    const isDisabled = startable ? "" : "disabled"
+    const hmsString = new Date(seconds*1000).toISOString().slice(11, 19);
 
     return(
-        <div>
-            <h3>{hmsString}</h3>
-            {expired ? <div>
-                <h4>Were you successful?</h4>
-                <Button value='success' onClick={handleClickReport}>Yes</Button>
-                <Button value='redo' onClick={handleClickReport}>No</Button>
-            </div> :
-            <Button onClick={handleButtonClick} >{active ? 'Pause' : 'Start'}</Button>
-            // <Button onClick={handleButtonClick}>{active ? 'Pause' : 'Start'}</Button>
-        }
-        </div>
+        <Card className='m-3'>
+            <Card.Title className='m-auto'>{hmsString}</Card.Title>
+            <>
+                <Button onClick={handleButtonClick} disabled={disabled}>{active ? 'Pause' : 'Start'}</Button>
+                <Button onClick={handleButtonClick} >{active ? 'Pause' : 'Start'}</Button>
+                <Button onClick={()=>{dispatch(resetTimer())}}>Reset</Button>
+            </>
+        </Card>
     )
 }
 

@@ -13,9 +13,10 @@ const userSlice = createSlice({
         },
         subtractAmount(state, action) {
             state.value -= action.payload
-        }
+        },
+        clearUser: (state) => initialState 
     }
 })
 
-export const { addTen, subtractAmount } = userSlice.actions
+export const { addTen, subtractAmount, clearUser } = userSlice.actions
 export default userSlice.reducer

@@ -4,15 +4,20 @@ import Nav from 'react-bootstrap/Nav';
 import NavLink from 'react-bootstrap/esm/NavLink';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAutoLogInQuery, useLogOutMutation } from '../app/services/userAPI';
+import { useHistory } from 'react-router-dom';
 
 function NavBar() {
 
     const [logOut, {data, isLoading, isSuccess, isError, error}] = useLogOutMutation()
-    const {data: user, isSuccess: isSuccessUser} = useAutoLogInQuery()
+    const {data: user, isSuccess: isSuccessUser, isError: isErrorUser} = useAutoLogInQuery()
+    const history = useHistory()
 
     function handleLogout(){
         logOut()
+        // history.push('/')
     }
+
+    // if(isErrorUser) history.push('/')
 
     return (
         <>

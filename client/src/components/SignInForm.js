@@ -22,11 +22,12 @@ function SignInForm() {
 
     function handleFormSubmit(e){
         e.preventDefault()
-        signIn(formData)        
+        signIn(formData)
+        // history.push('/home')        
     }
 
     let content
-    if(isSuccess) history.push('/home')
+    // if(isSuccess) history.push('/home')
     if(isError) {
         content = error.data.errors.map(e => <Alert className='mt-3' variant="danger">{e}</Alert>)
     }  

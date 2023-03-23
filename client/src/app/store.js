@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from '../features/userSlice'
 import timerReducer from '../features/timerSlice'
 import cartReducer from '../features/cartSlice'
+import flowReducer from '../features/flowSlice'
 import { userApi } from './services/userAPI'
 
 // import budgetReducer from '../features/budget/budgetSlice'
@@ -21,7 +22,7 @@ export const store = configureStore({
     reducer: {
         //user: userReducer
         timer: timerReducer,
-        // // pets: petsReducer
+        flow: flowReducer, 
         cart: cartReducer,
         [userApi.reducerPath]: userApi.reducer,
         // [dogsApi.reducerPath]: dogsApi.reducer

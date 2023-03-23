@@ -2,19 +2,36 @@ import Card from 'react-bootstrap/Card';
 import IntentionCardMain from './IntentionCardMain';
 import Timer from './Timer'
 import TipsPage from './TipsPage'
+import { useGetAttemptsQuery } from '../app/services/userAPI';
 
-function ChallengeCardMain({ currentAttempt }){
-    const length = currentAttempt?.challenge?.length
+function ChallengeCardMain(){
+
+    const {data: attempts, isSuccess} = useGetAttemptsQuery()
+    
+    let content
+
+    if(isSuccess){
+        const currentAttempt = attempts.find(a=>a.current)
+        const startTime = new Date(Date.parse(currentAttempt.start_time))
+        const length = currentAttempt.challenge.length
+
+        content = (
+            <Card>
+                <Card className='rounded justify-content-center' style={{borderWidth: '2px'}}>
+                    <Card.Title className="justify-content-center">{startTime > Date.now() ? "Tomorrow's challenge" : "Today's challenge" }</Card.Title>
+                    <Card.Text>{`Read for ${length} ${length == 1 ? "minute" : "minutes"}`}
+                    </Card.Text>
+                </Card>
+            </Card>
+        )
+    }
+
+    // console.log(startTime)
+
     return(
-        <Card className='rounded justify-content-center' style={{borderWidth: '2px'}}>
-            <Card.Title className="justify-content-center">Today's Challenge</Card.Title>
-            <Card.Text>{`Read for ${length} ${length == 1 ? "minute" : "minutes"}`}
-            <IntentionCardMain />
-            <TipsPage />
-            </Card.Text>
-            {/* <Timer seconds={length*60} attempt_id={currentAttempt.id} /> */}
-            <Timer seconds={3} attempt_id={currentAttempt.id} startable={currentAttempt.active}/>
-        </Card>
+       <>
+        {content}
+       </>
     )
 }
 

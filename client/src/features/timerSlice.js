@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = { active: false, expired: false }
+const initialState = { active: false, expired: false, seconds:0, started:false }
 
 const timerSlice = createSlice({
     name: 'timer',
@@ -13,6 +13,18 @@ const timerSlice = createSlice({
         },
         expireTimer(state){
             state.expired = true
+        },
+        setTimer(state, action){
+            state.seconds=action.payload
+        }
+        ,decrementTimer(state){
+            state.seconds -=1
+        },
+        startTimer(state){
+            state.started = true
+        }, 
+        resetTimer(state){
+            state.expired = false
         }
         // ,
         // subtractAmount(state, action) {
@@ -21,5 +33,5 @@ const timerSlice = createSlice({
     }
 })
 
-export const { toggleActive, expireTimer } = timerSlice.actions
+export const { toggleActive, expireTimer, setTimer, decrementTimer, startTimer, resetTimer } = timerSlice.actions
 export default timerSlice.reducer
