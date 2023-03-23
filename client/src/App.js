@@ -11,6 +11,7 @@ import Upgrade from "./components/Upgrade";
 import SharePage from "./components/SharePage";
 import BrowseReaders from "./components/BrowseReaders"
 import Feed from "./components/Feed"
+import UserProfile from "./components/UserProfile";
 import { useAutoLogInQuery } from './app/services/userAPI'
 import { Container } from "react-bootstrap";
 import Flow from "./components/Flow";
@@ -109,7 +110,7 @@ function App() {
               <Feed />
             </Route>
             <Route path='/profile'>
-              <Feed />
+              <UserProfile />
             </Route>
           </Switch> 
         {/* </Elements> */}

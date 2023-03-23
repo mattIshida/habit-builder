@@ -60,7 +60,7 @@ function CheckoutForm({ clientSecret }){
     <form onSubmit={handleSubmit}>
       <AddressElement options={{mode: 'billing'}} />
       <PaymentElement />
-      <Button disabled={!stripe}>Submit</Button>
+      <Button type="submit" disabled={!stripe}>Submit</Button>
     </form>
   )
 };

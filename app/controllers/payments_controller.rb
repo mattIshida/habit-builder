@@ -7,11 +7,14 @@ Stripe.api_key = ENV['STRIPE_SECRET_KEY']
 class PaymentsController < ApplicationController
 skip_before_action :authorize, only: :create
 
-    def calculate_order_amount(_items)
+    def calculate_order_amount(items)
         # Replace this constant with a calculation of the order's amount
         # Calculate the order total on the server to prevent
         # people from directly manipulating the amount on the client
-        50
+        
+        prices = {'lifetime'=> 1999}
+        
+        items.map {|i| prices[i['id']]||0}.sum
     end
 
 
@@ -19,7 +22,6 @@ skip_before_action :authorize, only: :create
         
         # content_type 'application/json'
         data = JSON.parse(request.body.read)
-    
         payment_intent = Stripe::PaymentIntent.create(
             amount: calculate_order_amount(data['items']),
             metadata: data['metadata'],
@@ -32,7 +34,9 @@ skip_before_action :authorize, only: :create
         )
 
         render json: {
-            clientSecret: payment_intent['client_secret']}, status: :created
+            clientSecret: payment_intent['client_secret'],
+            amount: payment_intent['amount']
+            }, status: :created
     end
 
 
