@@ -14,7 +14,7 @@ export const userApi = createApi({
                     method: 'POST',
                     body: formData
                 }),
-                providesTags: ['User']
+                invalidatesTags: ['User']
             }),
             signUp: builder.mutation({
                 query: ({id, ...patch}) => ({ 
@@ -22,7 +22,7 @@ export const userApi = createApi({
                     method: 'POST',
                     body: patch
                 }),
-                providesTags: ['User']
+                invalidatesTags: ['User']
             }),
             autoLogIn: builder.query({
                 query: () => ({ 

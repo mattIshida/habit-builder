@@ -13,6 +13,7 @@ import BrowseReaders from "./components/BrowseReaders"
 import Feed from "./components/Feed"
 import { useAutoLogInQuery } from './app/services/userAPI'
 import { Container } from "react-bootstrap";
+import Flow from "./components/Flow";
 // import {Elements} from '@stripe/react-stripe-js';
 // import {loadStripe} from '@stripe/stripe-js';
 
@@ -77,17 +78,20 @@ function App() {
             <Route exact path='/'>
               <LandingPage />
             </Route>
-            <Route exact path="/signin">
+            {/* <Route exact path="/signin">
               <SignInComponent />
             </Route>
             <Route exact path="/signup">
               <SignUpComponent />
-            </Route>
+            </Route> */}
             <Route exact path="/home">
               <Home />
             </Route>
             <Route path='/timer'>
               <Timer seconds={10}/>
+            </Route>
+            <Route path='/test'>
+              <Flow />
             </Route>
             <Route path='/checkout'>
               <CheckoutPage />
