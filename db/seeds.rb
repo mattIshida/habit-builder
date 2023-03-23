@@ -33,6 +33,60 @@ end
 end
 
 "Seeding attempts..."
+User.all.each do |u|
+    # for each user 
+    n = u.challenge
+    m = u.challenge
+
+    while n >= 0 do 
+        start_time = (Time.now - (m-n).days).utc
+        end_time = Time.new(start_time.year, start_time.month, start_time.day+1, nil, nil, nil, u.utc_offset*60)
+
+        challenge = Challenge.find_by(number: n, set: 1)
+
+        Attempt.create(
+            user: u,
+            challenge: challenge,
+            start_time: start_time,
+            end_time: end_time,
+            current: n == u.challenge,
+            active: n == u.challenge && [true, false].sample,
+            success: [true, false].sample
+        )
+        n -= 1
+    end
+
+    n_attempts = u.attempts.count
+
+    n_intentions = (1..n_attempts).to_a.sample
+    n_tips = (1..n_attempts).to_a.sample
+
+    u.attempts.sample(n_intentions).each do |a|
+        Intention.create(
+            user: u,
+            attempt: a,
+            where: Faker::Lorem.words(number: 2).join(' '),
+            what: Faker::Lorem.words(number: 2).join(' '),
+            when: Faker::Lorem.words(number: 2).join(' '),
+            note: Faker::Lorem.sentence(word_count: 7),
+            success: [true, false].sample,
+            created_at: a.start_time - 12.hours,
+            updated_at: a.start_time - 12.hours
+
+        )
+    end
+
+    u.attempts.where(current: false).each do |a|
+        Tip.create(
+            user: u,
+            attempt: a,
+            text: Faker::Lorem.sentence(word_count: 9),
+            image: nil,
+            created_at: a.start_time + 5.hours,
+            updated_at: a.start_time + 5.hours
+        )
+    end
+end
 
 
 

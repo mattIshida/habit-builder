@@ -3,6 +3,7 @@ import { toggleActive, expireTimer, setTimer, decrementTimer, startTimer, resetT
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Card } from 'react-bootstrap'
 import { useGetAttemptsQuery, useReportAttemptMutation } from '../app/services/userAPI'
+import { updateFlow } from '../features/flowSlice'
 
 function Timer(){
 
@@ -34,7 +35,10 @@ function Timer(){
         }
     },[active, expired])
 
-    if(seconds==0) dispatch(expireTimer())
+    if(seconds==0 && active) {
+        dispatch(expireTimer())
+        dispatch(updateFlow('reportingCard'))
+    }
 
     function handleButtonClick(){
         dispatch(startTimer())
@@ -47,7 +51,7 @@ function Timer(){
         <Card className='m-3'>
             <Card.Title className='m-auto'>{hmsString}</Card.Title>
             <>
-                <Button onClick={handleButtonClick} disabled={disabled}>{active ? 'Pause' : 'Start'}</Button>
+                {/* <Button onClick={handleButtonClick} disabled={disabled}>{active ? 'Pause' : 'Start'}</Button> */}
                 <Button onClick={handleButtonClick} >{active ? 'Pause' : 'Start'}</Button>
                 <Button onClick={()=>{dispatch(resetTimer())}}>Reset</Button>
             </>

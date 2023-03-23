@@ -108,6 +108,9 @@ function App() {
             <Route path='/feed'>
               <Feed />
             </Route>
+            <Route path='/profile'>
+              <Feed />
+            </Route>
           </Switch> 
         {/* </Elements> */}
     {/* }      */}

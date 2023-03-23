@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateFlow, resetFlow } from "../features/flowSlice";
 import { useHistory } from "react-router-dom";
 import ChallengeToday from "./ChallengeToday";
+import ChallengeFuture from "./ChallengeFuture";
+import IntentionForm from "./IntentionForm";
 
 function ChallengePage(){
     
@@ -25,12 +27,12 @@ function ChallengePage(){
                 <>                
                 <Card>
                     <Card.Text>This is the base card showing your challenge for the day</Card.Text>
-                    <ChallengeToday/>
+                    {/* <ChallengeToday/> */}
+                    <ChallengeCardMain/>
 
                 </Card>
                 <ButtonGroup>
-                <Button value='startTimer' onClick={handleClick}>Attempt</Button>
-                <Button value='C' onClick={handleClick}>go to C</Button>
+                <Button value='startTimer' onClick={handleClick}>Test Attempt</Button>
                 </ButtonGroup>
                 </>
 
@@ -47,6 +49,7 @@ function ChallengePage(){
         case 'reportingCard':
             content = (
                 <Card>
+                    <ReportingButtons />
                     <Card.Text>Were you successful?</Card.Text>
                     <Button value='reportSuccess' onClick={handleClick}>Yes!</Button>
                     <Button value='reportFail' onClick={handleClick}>No</Button>
@@ -57,6 +60,7 @@ function ChallengePage(){
             content = (
                 <Card>
                     <Card.Text>Congratulations!</Card.Text>
+                    <ChallengeFuture />
                     <Card.Text>Tomorrow's challenge: read for x minutes</Card.Text>
                     <Button value='postIntention' onClick={handleClick}>Post an intention</Button>
                     <Button value='shareTip' onClick={handleClick}>Share a tip</Button>
@@ -77,6 +81,7 @@ function ChallengePage(){
             content = (
                 <Card>
                     A form for sharing intentions
+                    <IntentionForm />
                     <Button value='submittedIntention' onClick={handleClick}>Done</Button>
                     <Button value='' onClick={handleClick}>Cancel</Button>
                 </Card>

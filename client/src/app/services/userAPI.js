@@ -5,7 +5,7 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: ''
     }),
-    tagTypes: ['User', 'Attempt', 'Intention', 'Tips', 'Readers', 'Profile', 'Follows', 'Feed'],
+    tagTypes: ['User', 'Attempt', 'Intention', 'Tips', 'Readers', 'Profile', 'Follows', 'Feed', 'Bookmark'],
     endpoints(builder){
         return {
             signIn: builder.mutation({
@@ -59,7 +59,7 @@ export const userApi = createApi({
                     method: 'POST',
                     body: formData
                 }),
-                providesTags: ['Intention', 'User']
+                invalidatesTags: ['Intention', 'User', 'Attempts']
             }),
             getTips: builder.query({
                 query: (challenge_id) => ({
@@ -88,7 +88,7 @@ export const userApi = createApi({
                     method: 'POST',
                     body: followObj
                 }),
-                providesTags: ['Follows']
+                invalidatesTags: ['Follows']
             }),
             getFeed: builder.query({
                 query: () => ({
@@ -96,6 +96,13 @@ export const userApi = createApi({
                     method: 'GET'
                 }), 
                 providesTags: ['Feed']
+            }), 
+            postBookmark: builder.mutation({
+                query: () => ({
+                    url: '/bookmarks',
+                    method: 'POST'
+                }),
+                invalidatesTags: ['Bookmark']
             })
         }
 
@@ -115,5 +122,6 @@ export const {
     useGetReadersQuery,
     useGetReaderProfileQuery,
     usePostFollowMutation,
-    useGetFeedQuery
+    useGetFeedQuery,
+    usePostBookmarkMutation
 } = userApi

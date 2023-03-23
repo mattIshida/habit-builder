@@ -60,7 +60,7 @@ function NavBar() {
                 title="Account"
                 menuVariant="dark"
                 >
-                <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/upgrade">
                     Upgrade
                 </NavDropdown.Item>

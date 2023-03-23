@@ -26,21 +26,20 @@ function IntentionForm(){
 
     return(
         <div>
-            <h2>Set an intention to help you complete your next challenge</h2>
             <Form onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" >
-                    <Form.Label>Where will I read?</Form.Label>
-                    <Form.Control type="username" placeholder="Enter email" name="where" value={formData.where} onChange={handleFormChange}/>
+                    <Form.Label>Where will you read?</Form.Label>
+                    <Form.Control type="username" placeholder="on the bus, the couch, etc." name="where" value={formData.where} onChange={handleFormChange}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
-                    <Form.Label>What will I read?</Form.Label>
-                    <Form.Control type="username" placeholder="Enter email" name="what" value={formData.what} onChange={handleFormChange}/>
+                    <Form.Label>What will you read?</Form.Label>
+                    <Form.Control type="username" placeholder="Middlemarch, Carrie, etc." name="what" value={formData.what} onChange={handleFormChange}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
-                    <Form.Label>When will I read?</Form.Label>
-                    <Form.Control type="username" placeholder="Enter email" name="when" value={formData.when} onChange={handleFormChange}/>
+                    <Form.Label>When will you read?</Form.Label>
+                    <Form.Control type="username" placeholder="8am, after dinner, etc." name="when" value={formData.when} onChange={handleFormChange}/>
                 </Form.Group>
 
                 {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
