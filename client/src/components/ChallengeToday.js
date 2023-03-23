@@ -6,7 +6,7 @@ function ChallengeToday(){
     
     const {data: attempts, isSuccess} = useGetAttemptsQuery()
     let content   
-
+    console.log('attempts', attempts)
     if(isSuccess){
         const attemptToday = attempts.find(a => Date.parse(a.start_time) < Date.now() & Date.now() < Date.parse(a.end_time))
         const length = attemptToday.challenge.length

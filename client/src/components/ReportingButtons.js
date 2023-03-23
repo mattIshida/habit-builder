@@ -1,11 +1,14 @@
 import { useGetAttemptsQuery, useReportAttemptMutation } from "../app/services/userAPI";
 import SpinnerLoading from "./SpinnerLoading";
 import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { updateFlow } from "../features/flowSlice";
 
 function ReportingButtons(){
     
     const {data: attempts, isSuccess} = useGetAttemptsQuery()
     const [reportAttempt] = useReportAttemptMutation()
+    const dispatch = useDispatch()
     
     let currentAttempt, content
     
@@ -13,6 +16,8 @@ function ReportingButtons(){
         currentAttempt = attempts.find((a)=>a.current)
 
         function handleClickReport(e){
+            if(e.target.value == 'success') dispatch(updateFlow('reportSuccess'))
+            else dispatch(updateFlow('reportFail'))
             reportAttempt({id: currentAttempt.id, success: e.target.value === 'success'})
         }
 
