@@ -28,7 +28,7 @@ function SignUpForm(){
     let content
     if(isSuccess) {
         console.log('success')
-        history.push('/upgrade')
+        // history.push('/upgrade')
     }
     if(isError) {
         content = error.data.errors.map(e => <Alert variant="danger">{e}</Alert>)

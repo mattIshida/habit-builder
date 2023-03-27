@@ -36,7 +36,9 @@ function Home(){
         const currentAttempt = attemptData.find((a)=>a.current)
         console.log(currentAttempt)
         content = (<div>
-            <h2>{`Welcome, ${data.username}`}</h2>
+            <Container className='mt-3'>
+            <h1>{`Welcome, ${data.username}`}</h1>
+            </Container>
             <Container className='justify-content-center col-lg-6 col-md-7 col-sm-10 p-3'>
                 {/* <ChallengeCardMain currentAttempt={currentAttempt}/> */}
                 <ChallengePage />

@@ -81,10 +81,10 @@ function App() {
             </Route>
             {/* <Route exact path="/signin">
               <SignInComponent />
-            </Route>
+            </Route>*/}
             <Route exact path="/signup">
               <SignUpComponent />
-            </Route> */}
+            </Route> 
             <Route exact path="/home">
               <Home />
             </Route>
@@ -110,7 +110,7 @@ function App() {
               <Feed />
             </Route>
             <Route path='/profile'>
-              <UserProfile />
+              {/* <UserProfile /> */}
             </Route>
           </Switch> 
         {/* </Elements> */}

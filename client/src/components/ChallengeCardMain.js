@@ -29,10 +29,10 @@ function ChallengeCardMain(){
 
         content = (
             <>
-                <Card>
                     <ChallengeToday />
+
+                    { disabled ? <div className="fleuron">❦</div>: null}
                     <ChallengeFuture />
-                </Card>
                 <Button disabled={disabled} onClick={handleClick}>Attempt</Button>
             </>
         )

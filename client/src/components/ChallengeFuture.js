@@ -31,12 +31,13 @@ function ChallengeFuture(){
         }
 
         content = (
-            <Card>
-                <Card.Title className="justify-content-center">Tomorrow's challenge {`${attempt.challenge.id}`}</Card.Title>
-                <Card.Text>{`Read for ${length} ${length == 1 ? "minute" : "minutes"}`}</Card.Text>
-                <Card.Text>{`Available in ${waitText}`}</Card.Text>
-                
-                {hasIntention ? <Button onClick={()=>handleClick('viewIntention')}>See intention</Button> : <Button onClick={()=>handleClick('postIntention')}>Post an Intention</Button>}
+            <Card style={{ backgroundColor: '#FFFFFF' }} className='my-2'>
+                <Card.Body className='p-3 text-center'>
+                    <Card.Title className="text-center pb-2">Tomorrow's challenge {`${attempt.challenge.id}`}</Card.Title>
+                    <Card.Text className="font-weight-bold">{`Read for ${length} ${length == 1 ? "minute" : "minutes"}`}</Card.Text>
+                    <Card.Text>{`Available in ${waitText}`}</Card.Text>
+                    {hasIntention ? <Button style={{ backgroundColor: '#444444' }}  className='card-style-1' onClick={()=>handleClick('viewIntention')}>See intention</Button> : <Button onClick={()=>handleClick('postIntention')}>Post an Intention</Button>}
+                </Card.Body>
             </Card>
         )
     }

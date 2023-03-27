@@ -23,5 +23,10 @@ Rails.application.routes.draw do
   get '/readers/:id', to: 'users#reader'
 
   get '/feed', to: 'users#feed'
+  # get '/auth/:provider/callback', to: "sessions#omniauth"
+  get '/token', to: 'sessions#token'
+  
+  get '/google_auth/login_url'#, to: "googleAuth#login"
+  get '/google_auth/callback'#, to: "googleAuth#callback"
 
 end

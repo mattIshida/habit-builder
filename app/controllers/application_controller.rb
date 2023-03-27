@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::API
     include ActionController::Cookies
     before_action :authorize
+    # protect_from_forgery with: :exception
+
+    # include ActionController::RequestForgeryProtection
+
+    # protect_from_forgery with: :exception
+
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
