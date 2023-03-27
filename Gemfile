@@ -64,3 +64,15 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 
 gem "whenever", "~> 1.0"
+# gem 'omniauth'
+# gem 'omniauth-google-oauth2'
+
+#gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+gem "googleauth", "~> 1.5"
+
+gem "rack-cors", "~> 2.0"
+
+gem "google-api-client", "~> 0.53.0"
+
+gem "google-id-token", "~> 1.4"

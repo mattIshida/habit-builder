@@ -7,26 +7,29 @@ import { useAutoLogInQuery, useLogOutMutation } from '../app/services/userAPI';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { clearUser } from '../features/userSlice';
+import NavBarStatic from './NavBarStatic';
+import { userApi } from '../app/services/userAPI';
 
 function NavBar() {
 
     const [logOut, {data, isLoading, isSuccess, isError, error}] = useLogOutMutation()
-    const {data: user, isSuccess: isSuccessUser, isError: isErrorUser} = useAutoLogInQuery()
+    const {data: user, isSuccess: isSuccessUser, isError: isErrorUser, refetch} = useAutoLogInQuery()
     const history = useHistory()
     const dispatch = useDispatch()
 
     function handleLogout(){
         logOut()
-        dispatch(clearUser())
+        // refetch()
+        // dispatch(clearUser())
         // history.push('/')
     }
 
-    // if(isErrorUser) history.push('/')
+    //if(isErrorUser) return <NavBarStatic />
 
     return (
         <>
-        <Navbar bg="dark" variant="dark">
-            <Container>
+        <Navbar bg='dark' variant="dark" className="my-navbar">
+            <Container >
             <Navbar.Brand href="/">
                 {/* <img
                 alt=""

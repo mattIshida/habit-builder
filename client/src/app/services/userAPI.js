@@ -37,6 +37,7 @@ export const userApi = createApi({
                     method: 'DELETE',
                 }),
                 invalidatesTags: ['User']
+                // transformResponse: (response, meta, arg) => { return {user:""}},
             }),
             reportAttempt: builder.mutation({
                 query: ({id, ...patch}) => ({

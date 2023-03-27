@@ -45,11 +45,12 @@ function Timer(){
         dispatch(toggleActive())
     }
 
-    const hmsString = new Date(seconds*1000).toISOString().slice(11, 19);
+
+    const hmsString = new Date(seconds*1000).toISOString().slice(seconds < 3600 ? 14 : 11, 19);
 
     return(
         <Card className='m-3'>
-            <Card.Title className='m-auto'>{hmsString}</Card.Title>
+            <div className='m-auto timerDigits'>{hmsString}</div>
             <>
                 {/* <Button onClick={handleButtonClick} disabled={disabled}>{active ? 'Pause' : 'Start'}</Button> */}
                 <Button onClick={handleButtonClick} >{active ? 'Pause' : 'Start'}</Button>

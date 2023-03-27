@@ -2,3 +2,33 @@
   text-align: center;
 }
 
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: red;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', cursive;
+}
+
+p {
+  font-family: 'Playfair Display', serif;
+}
+
+.card {
+  font-family: 'Montserrat', sans-serif;
+}
+
+p.card-text {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-style-1 {
+  font-family: 'Montserrat', sans-serif;
+  background-color: red;
+}
+
+.btn-primary {
+  background-color: #0B3954;
+}
+

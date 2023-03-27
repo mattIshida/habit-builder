@@ -25,15 +25,14 @@ function ChallengePage(){
         case '':
             content = (
                 <>                
-                <Card>
-                    <Card.Text>This is the base card showing your challenge for the day</Card.Text>
-                    {/* <ChallengeToday/> */}
                     <ChallengeCardMain/>
 
-                </Card>
+                
+                <div>
                 <ButtonGroup>
                 <Button value='startTimer' onClick={handleClick}>Test Attempt</Button>
                 </ButtonGroup>
+                </div>
                 </>
 
             )
