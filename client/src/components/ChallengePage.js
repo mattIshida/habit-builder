@@ -2,7 +2,7 @@ import { useGetAttemptsQuery } from "../app/services/userAPI";
 import ChallengeCardMain from "./ChallengeCardMain";
 import ReportingButtons from "./ReportingButtons";
 import Timer from "./Timer";
-import { Button, ButtonGroup, Card } from "react-bootstrap";
+import { Button, ButtonGroup, Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFlow, resetFlow } from "../features/flowSlice";
 import { useHistory } from "react-router-dom";
@@ -25,14 +25,13 @@ function ChallengePage(){
         case '':
             content = (
                 <>                
+                    
                     <ChallengeCardMain/>
-
-                
-                <div>
-                <ButtonGroup>
-                <Button value='startTimer' onClick={handleClick}>Test Attempt</Button>
-                </ButtonGroup>
-                </div>
+                    <div>
+                        <ButtonGroup>
+                        <Button value='startTimer' onClick={handleClick}>Test Attempt</Button>
+                        </ButtonGroup>
+                    </div>
                 </>
 
             )
@@ -78,12 +77,12 @@ function ChallengePage(){
             break;
         case 'postIntention':
             content = (
-                <Card>
-                    A form for sharing intentions
-                    <IntentionForm />
+                <Container className="postIntention">
+                    <h2>Post an Intention</h2>
+                    <IntentionForm className="intentionForm"/>
                     <Button value='submittedIntention' onClick={handleClick}>Done</Button>
                     <Button value='' onClick={handleClick}>Cancel</Button>
-                </Card>
+                </Container>
             )
             break;
         case 'shareTip':

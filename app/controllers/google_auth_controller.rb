@@ -2,6 +2,7 @@ require 'google/apis/calendar_v3'
 require 'google/apis/oauth2_v2'
 # require 'google-id-token'
 require 'googleauth'
+require "googleauth/token_store"
 
 class GoogleAuthController < ApplicationController
 
@@ -17,6 +18,7 @@ class GoogleAuthController < ApplicationController
         client.fetch_access_token!
         puts "client=", client
         
+        token_store = Google::Auth::Stores::RedisTokenStore.new(redis: Redis.new)
 
         calendar = Google::Apis::CalendarV3::CalendarService.new
         calendar.authorization = client
@@ -30,8 +32,8 @@ class GoogleAuthController < ApplicationController
         #user_name = payload['name']
         
         google_info = userInfo.get_userinfo_v2
-        
-
+        byebug
+        # 
         user = User.find_by(provider: payload["iss"], provider_id: google_info.id)
         if user&.valid? 
             user.update(email: google_info.email,
@@ -72,6 +74,7 @@ class GoogleAuthController < ApplicationController
     
       def client
         @client ||= Signet::OAuth2::Client.new(
+        access_type: 'offline',
           client_id: ENV['GOOGLE_CLIENT_ID'],
           client_secret: ENV['GOOGLE_CLIENT_SECRET'],
           authorization_uri: 'https://accounts.google.com/o/oauth2/auth',

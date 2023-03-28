@@ -5,7 +5,7 @@ import TipsPage from './TipsPage'
 import { useGetAttemptsQuery } from '../app/services/userAPI';
 import ChallengeToday from './ChallengeToday';
 import ChallengeFuture from './ChallengeFuture';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { updateFlow } from '../features/flowSlice';
 import { useDispatch } from 'react-redux';
 
@@ -29,11 +29,11 @@ function ChallengeCardMain(){
 
         content = (
             <>
-                    <ChallengeToday />
+                <ChallengeToday />
 
-                    { disabled ? <div className="fleuron">❦</div>: null}
-                    <ChallengeFuture />
-                <Button disabled={disabled} onClick={handleClick}>Attempt</Button>
+                { disabled ? <div className="fleuron">❦</div>: null}
+                <ChallengeFuture />
+            <Button disabled={disabled} onClick={handleClick}>Attempt</Button>
             </>
         )
     }

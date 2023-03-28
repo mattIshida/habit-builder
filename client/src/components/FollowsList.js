@@ -1,8 +1,8 @@
-import Card from 'react-bootstrap/Card'
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 function FollowsList( { items }){
 
-    let itemCards
+    let itemCards, listItems
 
     if(items.length === 0) itemCards = null
 
@@ -16,10 +16,20 @@ function FollowsList( { items }){
         )
     })
 
+    listItems = items?.slice().sort((a,b)=>b.updated_at - a.updated_at).map(item => {
+        return(
+            <ListGroupItem key={item.id} action href={`/readers/${item.id}`}>
+                    {item.username}
+            </ListGroupItem>
+        )
+    })
+
     return(
         <div>
-            <h3>Follows</h3>
-            {itemCards}
+            <h3>Following</h3>
+            <ListGroup>
+                {listItems}
+            </ListGroup>
         </div>
     )
 }

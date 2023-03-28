@@ -35,15 +35,14 @@ function Home(){
     } else if (isSuccess & attemptIsSuccess) {
         const currentAttempt = attemptData.find((a)=>a.current)
         console.log(currentAttempt)
-        content = (<div>
-            <Container className='mt-3'>
-            <h1>{`Welcome, ${data.username}`}</h1>
-            </Container>
-            <Container className='justify-content-center col-lg-6 col-md-7 col-sm-10 p-3'>
-                {/* <ChallengeCardMain currentAttempt={currentAttempt}/> */}
-                <ChallengePage />
-            </Container>
-        </div>)
+        content = (
+            <div>
+                <Container className='justify-content-center col-lg-6 col-md-7 col-sm-10 p-3'>
+                    {/* <ChallengeCardMain currentAttempt={currentAttempt}/> */}
+                    <ChallengePage />
+                </Container>
+            </div>
+        )
         
         //posts.map(post => <PostExcerpt key={post.id} post={post} />)
     } 

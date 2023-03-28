@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     # auto login
     def show
         # @user.update(utc_offset: params[:utc_offset])
-        render json: @user, status: :ok
+        render json: @user, status: :ok, serializer: ReaderSerializer
     end
 
 

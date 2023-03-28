@@ -1,8 +1,9 @@
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card'
 
 function FollowerList( { items }){
 
-    let itemCards
+    let itemCards, listItems
 
     if(items.length === 0) itemCards = null
 
@@ -16,10 +17,21 @@ function FollowerList( { items }){
         )
     })
 
+    listItems = items?.slice().sort((a,b)=>b.updated_at - a.updated_at).map(item => {
+        return(
+            <ListGroupItem key={item.id} action href={`/readers/${item.id}`}>
+                    {item.username}
+            </ListGroupItem>
+        )
+    })
+
     return(
         <div>
             <h3>Followers</h3>
-            {itemCards}
+            {/* {itemCards} */}
+            <ListGroup>
+                {listItems}
+            </ListGroup>
         </div>
     )
 }
