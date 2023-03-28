@@ -1,10 +1,12 @@
-import { useAutoLogInQuery } from "../app/services/userAPI";
+import { useAutoLogInQuery, useGetReaderProfileQuery } from "../app/services/userAPI";
 import AttemptList from "./AttemptList";
 import IntentionList from "./IntentionList";
 import TipList from "./TipList";
 import FollowsList from "./FollowsList";
 import FollowerList from "./FollowerList";
 import Feed from "./Feed";
+import { Tabs, Tab, Container, Card} from 'react-bootstrap'
+import UserCardProfile from "./UserCardProfile";
 
 function UserProfile(){
 
@@ -12,16 +14,32 @@ function UserProfile(){
 
     let content
 
+    console.log('user', user)
     if(isSuccess){
         content = (
-            <div>
-                {/* <h2>{user.username}</h2>
-                <AttemptList items={user.attempts}/>
-                <IntentionList items={user.intentions}/>
-                <TipList items={user.tips}/>
-                <FollowsList items={user.followed_users} /> 
-                <FollowerList items={user.followers} />  */}
-            </div>
+            <Container className='mt-3'>
+                <UserCardProfile />
+                <Tabs
+                    defaultActiveKey="intentions"
+                    className="my-3"
+                >
+                    <Tab eventKey="intentions" title="Intentions">
+                        <IntentionList items={user.intentions}/>
+                    </Tab>
+                    <Tab eventKey="tips" title="Tips">
+                        <TipList items={user.tips}/>
+                    </Tab>
+                    <Tab eventKey="challenges" title="Challenges">
+                        <AttemptList items={user.attempts}/>
+                    </Tab>
+                    <Tab eventKey="follows" title="Following">
+                        <FollowsList items={user.followed_users} /> 
+                    </Tab>
+                    <Tab eventKey="followers" title="Followers" >
+                        <FollowerList items={user.followers} /> 
+                    </Tab>
+                </Tabs>
+            </Container>
         )
     }
 

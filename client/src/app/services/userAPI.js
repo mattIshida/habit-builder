@@ -36,7 +36,16 @@ export const userApi = createApi({
                     url: `/logout`,
                     method: 'DELETE',
                 }),
-                invalidatesTags: ['User']
+                //invalidatesTags: ['User']
+                async onQueryStarted(_, {dispatch, queryFulfilled}) {
+                    try {
+                        await queryFulfilled
+                        dispatch(userApi.util.resetApiState())
+                    } catch {
+                        dispatch(userApi.util.invalidateTags(['User']))
+                        // dispatch(userApi.util.resetApiState())
+                    }
+                }
                 // transformResponse: (response, meta, arg) => { return {user:""}},
             }),
             reportAttempt: builder.mutation({

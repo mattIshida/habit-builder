@@ -12,9 +12,12 @@ Challenge.destroy_all
 
 puts "Seeding users..."
 20.times do
+    user = Faker::Internet.user('username', 'email')
     User.create(
-        username: Faker::Internet.username, 
+        username: user[:username], 
         password: "Password123!",
+        email: user[:email],
+        image: Faker::Avatar.image,
         challenge: (1..10).to_a.sample,
         challenge_set: 1
     )

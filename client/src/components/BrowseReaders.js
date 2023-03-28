@@ -2,6 +2,7 @@ import ReaderCard from "./ReaderCard"
 import ReaderProfile from './ReaderProfile'
 import { useGetReadersQuery } from "../app/services/userAPI";
 import { Route, Switch } from 'react-router-dom'
+import { Container, Col, Row } from "react-bootstrap";
 
 function BrowseReaders(){
     
@@ -11,9 +12,18 @@ function BrowseReaders(){
 
     if(isSuccess){
 
-        const readerCards = readers.map(readerObj => <ReaderCard key={readerObj.id} reader={readerObj}/>)
+        const readerCards = readers.map(readerObj => 
+            <Col md={6} xl={4} className='my-3'>
+            <ReaderCard key={readerObj.id} reader={readerObj}/>
+            </Col>
+        )
 
-        content = readerCards
+        content = (
+            <Row className="justify-content-center">
+                {readerCards}
+            </Row>
+            
+        )
     }
 
     return(

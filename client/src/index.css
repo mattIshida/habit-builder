@@ -1,3 +1,7 @@
+:root {
+  --dark-blue: #0B3954;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -33,7 +37,7 @@ a,p {
 
 button {
   font-family: 'Montserrat', serif;
-  background-color: #0B3954
+  background-color: var(--dark-blue)
 }
 
 .card-style-1 {
@@ -85,3 +89,29 @@ button {
 .headline {
   margin-top: 1.5rem;
 }
+
+.about-header {
+  font-family: 'Playfair Display';
+  font-style: 'italic';
+  font-size: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem; 
+}
+
+.aboutCarouselItem {
+  background-color: red;
+  font-family: 'Montserrat';
+  color: #f0f0f0;
+  height: 75vh;
+
+}
+
+.intentionForm {
+  font-family: "Montserrat";
+  margin-top: "10rem"
+}
+
+.readerCard {
+  text-align: center;
+}
+

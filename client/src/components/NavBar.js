@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { clearUser } from '../features/userSlice';
 import NavBarStatic from './NavBarStatic';
 import { userApi } from '../app/services/userAPI';
+import { Image } from 'react-bootstrap';
 
 function NavBar() {
 
@@ -17,11 +18,13 @@ function NavBar() {
     const history = useHistory()
     const dispatch = useDispatch()
 
+    if(isSuccessUser) console.log('user',user.image)
+
     function handleLogout(){
         logOut()
         // refetch()
         // dispatch(clearUser())
-        // history.push('/')
+        history.push('/')
     }
 
     //if(isErrorUser) return <NavBarStatic />
@@ -67,6 +70,8 @@ function NavBar() {
                 title="Account"
                 menuVariant="dark"
                 >
+                
+                
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/upgrade">
                     Upgrade

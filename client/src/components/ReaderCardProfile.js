@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import { useRouteMatch, NavLink } from 'react-router-dom'
 import { useAutoLogInQuery, usePostFollowMutation } from '../app/services/userAPI'
 
-function ReaderCard({ reader }){
+function ReaderCardProfile({ reader }){
 
     const {url} = useRouteMatch()
     const {data: user} = useAutoLogInQuery()
@@ -24,11 +24,10 @@ function ReaderCard({ reader }){
                 <div>Points: {reader.points} </div>
                 <div>Streak: {reader.streak}</div>
             </Card.Text>
-            <NavLink to={`${url}/${reader.id}`}>View Profile</NavLink>
-            </Card.Body>
             <Button onClick={handleClickFollow}>Follow</Button>
+            </Card.Body>
         </Card>
     )
 }
 
-export default ReaderCard;
+export default ReaderCardProfile;

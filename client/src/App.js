@@ -13,58 +13,62 @@ import BrowseReaders from "./components/BrowseReaders"
 import Feed from "./components/Feed"
 import UserProfile from "./components/UserProfile";
 import { useAutoLogInQuery } from './app/services/userAPI'
-import { Container } from "react-bootstrap";
+import { Carousel, CarouselItem, Container } from "react-bootstrap";
 import Flow from "./components/Flow";
-// import {Elements} from '@stripe/react-stripe-js';
-// import {loadStripe} from '@stripe/stripe-js';
-
-// const stripePromise = loadStripe('pk_test_51Mmi4TGX9v97gt2cUREGXSOJ7Kz19oOGSLoMCyDpIf6ni0vfUxife1kHJ54rtcuy7NfS1TFDbOj3HusNz6URbZDK002kPsKN77');
+import SpinnerLoading from "./components/SpinnerLoading";
+import NavBarStatic from "./components/NavBarStatic";
 
 function App() {
 
-  // const [clientSecret, setClientSecret] = useState("");
-
-  // useEffect(() => {
-  //   // Create PaymentIntent as soon as the page loads
-  //   fetch("/create-payment-intent", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("clientSecret", data.clientSecret)
-  //       setClientSecret(data.clientSecret)
-  //     });
-  // }, []);
-
-  // const appearance = {
-  //   theme: 'stripe',
-  // };
-  // const options = {
-  //   // clientSecret,
-  //   appearance,
-  // };
-
-
-
-  // const options = {
-  //   // passing the client secret obtained from the server
-  //   clientSecret: '{{CLIENT_SECRET}}',
-  // };
   const history = useHistory()
-  const {data, 
-    isLoading,
-    isSuccess,
-    isError,
-    error} = useAutoLogInQuery()
-  console.log(data)
+  const {data, isLoading, isSuccess, isError, error} = useAutoLogInQuery()
 
-  let content
-
-  // if(isSuccess){
-  //   history.push('/home')
-  // }
+  if(isError){
+    return(
+      <>
+            <NavBarStatic className='sticky-top'/>
+            <Switch>
+              <Route path='/signup'>
+                {/* <NavBarStatic fluid className='sticky-top' style={{zIndex: 2, position: 'absolute', top:0}}/> */}
+                <Container fluid style={{height: '95vh', position:"relative", padding: '0px', zIndex:1}}>
+                    <Container className="col-md-8 col-lg-6 col-sm-10" style={{position:"absolute", left: "50%", top:"50%", transform: "translate(-50%, -50%)"}}>
+                      <SignUpComponent />
+                    </Container>
+                </Container>
+              </Route>
+              <Route path='/'>
+                <Container className="col-md-8 col-lg-6 col-sm-10" style={{height: '95vh', position: 'relative'}}>
+                  <Container className='headline'>
+                    <h1>Welcome to HabitBuilder</h1>
+                    <h2>A journey to good reading habits informed by best practices ...</h2>
+                  </Container>
+                  <Container style={{position:"absolute", top:"50%", transform: "translateY(-50%)"}}>
+                    <SignInComponent />
+                  </Container>
+                </Container>
+                <Container fluid style={{height: "95vh", backgroundColor: 'var(--dark-blue)', color: "#f0f0f0", position: 'relative'}}>
+                  <Container className="col-md-8 col-lg-6 col-sm-10 pt-3">
+                      <div className="about-header">What is HabitBuilder?</div>
+                      <Container>
+                      <Carousel fade interval={null}>
+                        <CarouselItem className="aboutCarouselItem">
+                            <p>lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                        </CarouselItem>
+                        <CarouselItem className="aboutCarouselItem">
+                          Item 2
+                        </CarouselItem>
+                        <CarouselItem className="aboutCarouselItem">
+                          Item 3
+                        </CarouselItem>
+                      </Carousel>
+                      </Container>
+                  </Container>
+                </Container>
+              </Route>
+            </Switch>
+      </>
+    )  
+  }
   
   return (
     
@@ -110,7 +114,7 @@ function App() {
               <Feed />
             </Route>
             <Route path='/profile'>
-              {/* <UserProfile /> */}
+              <UserProfile />
             </Route>
           </Switch> 
         {/* </Elements> */}

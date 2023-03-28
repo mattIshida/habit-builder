@@ -25,7 +25,7 @@ function IntentionForm(){
     }
 
     return(
-        <div>
+        <div className="intentionForm">
             <Form onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" >
                     <Form.Label>Where will you read?</Form.Label>

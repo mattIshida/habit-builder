@@ -11,8 +11,9 @@ function LandingPage(){
 
     let content
 
-    if(isLoading) content = <SpinnerLoading/>
-    else if(isSuccess) content= <Home />
+    //if(isLoading) content = <SpinnerLoading/>
+    //else 
+    if(isSuccess) content= <Home />
     else content = <>
         <Container >
             <Container className='headline'>
