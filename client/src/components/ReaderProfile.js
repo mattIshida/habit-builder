@@ -5,7 +5,7 @@ import IntentionList from './IntentionList'
 import TipList from './TipList'
 import FollowsList from './FollowsList'
 import FollowerList from './FollowerList'
-import ReaderCardProfile from './ReaderCardProfile';
+// import ReaderCardProfile from './ReaderCardProfile';
 import { Container, Tab, Tabs, Card } from 'react-bootstrap';
 
 function ReaderProfile(){
@@ -19,7 +19,7 @@ function ReaderProfile(){
         console.log(profile)
         content = (
             <Container className='mt-3'>
-                <ReaderCardProfile reader={profile} />
+                {/* <ReaderCardProfile reader={profile} /> */}
 
                 {/* <Container className="my-3 col-md-5 col-sm-6 col-lg-4" style={{}}>
                     <Card className='challengeCard lg-6' style={{height: "10rem"}}>
