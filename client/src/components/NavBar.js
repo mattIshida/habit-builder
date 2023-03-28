@@ -24,12 +24,13 @@ function NavBar() {
         logOut()
         // refetch()
         // dispatch(clearUser())
-        history.push('/')
+        // history.push('/')
     }
 
     //if(isErrorUser) return <NavBarStatic />
+    let content
 
-    return (
+    if(isSuccessUser) content = (
         <>
         <Navbar bg='dark' variant="dark" className="my-navbar">
             <Container >
@@ -41,7 +42,7 @@ function NavBar() {
                 height="30"
                 className="d-inline-block align-top"
                 />{' '} */}
-                HabitBuilder
+                HabitBuilder{user.tier>0 ? " Premium": null} 
             </Navbar.Brand>
             <Nav className="justify-content-end">
                 {/* <Nav.Link href="/signup">Sign Up</Nav.Link> */}
@@ -50,7 +51,7 @@ function NavBar() {
                 {/* <Nav.Link href="/checkout">Checkout</Nav.Link> */}
                 {/* <Nav.Link href="/upgrade">Upgrade</Nav.Link> */}
                 {/* <Nav.Link href="/share">Share</Nav.Link> */}
-                <Nav.Link href="/readers">Browse</Nav.Link>
+                {/* <Nav.Link href="/readers">Browse</Nav.Link> */}
                 <Nav.Link href="/feed">Feed</Nav.Link>
             </Nav>
             
@@ -73,9 +74,9 @@ function NavBar() {
                 
                 
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/upgrade">
+                {user.tier == 0 ? <NavDropdown.Item href="/upgrade">
                     Upgrade
-                </NavDropdown.Item>
+                </NavDropdown.Item> : null}
                 <NavDropdown.Item href="/readers">Add friends</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogout}>
@@ -88,6 +89,8 @@ function NavBar() {
         </Navbar>
         </>
     );
+
+    return content
 }
 
 export default NavBar;
