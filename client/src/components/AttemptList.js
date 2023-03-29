@@ -33,7 +33,7 @@ function AttemptList( { items }){
                 </Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        {`Attempted a challenge to read for XX minutes`}
+                        {`Attempted a challenge to read for ${item.challenge.length} minutes`}
                     </Card.Text>
                 </Card.Body>
             </Card>

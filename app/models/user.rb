@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
         now = Time.now
         start_time = now
-        end_time = Time.new(now.year, now.month, now.day+1, nil, nil, nil, self.utc_offset*60)
+        end_time = now.end_of_day
 
         Attempt.create(
             user: self, 

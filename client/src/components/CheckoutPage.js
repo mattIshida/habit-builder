@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react'
 import { useAutoLogInQuery } from '../app/services/userAPI';
 import { useSelector } from 'react-redux'
 import CartDisplay from './CartDisplay';
+import CheckoutConfirmation from './CheckoutConfirmation';
+import { Route, Switch } from 'react-router-dom'
 
 const stripePromise = loadStripe('pk_test_51Mmi4TGX9v97gt2cUREGXSOJ7Kz19oOGSLoMCyDpIf6ni0vfUxife1kHJ54rtcuy7NfS1TFDbOj3HusNz6URbZDK002kPsKN77');
 
@@ -55,7 +57,15 @@ function CheckoutPage(){
                 <h2>Checkout and Payment</h2>
                 <CartDisplay amount={amount} item={cart} /> 
                 <Elements stripe={stripePromise} options={options}>
-                    <CheckoutForm clientSecret={clientSecret}/>
+                    <Switch>
+                        <Route exact path="/checkout">
+                            <CheckoutForm clientSecret={clientSecret}/>
+                        </Route>
+                        {/* <Route path="/checkout/confirmation">
+                            <CheckoutConfirmation />
+                        </Route> */}
+                    </Switch>
+
                 </Elements>
             </>
             }

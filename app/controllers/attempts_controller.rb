@@ -10,6 +10,11 @@ class AttemptsController < ApplicationController
         render json: attempt, status: :ok
     end
 
+    def detail 
+        attempt = @user.attempts.find_by(current: true)
+        render json: attempt, status: :ok, serializer: AttemptDetailSerializer
+    end
+
     def create
     end
 

@@ -17,11 +17,26 @@ import { Carousel, CarouselItem, Container } from "react-bootstrap";
 import Flow from "./components/Flow";
 import SpinnerLoading from "./components/SpinnerLoading";
 import NavBarStatic from "./components/NavBarStatic";
+import CheckoutConfirmation from "./components/CheckoutConfirmation";
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+
+const stripePromise = loadStripe('pk_test_51Mmi4TGX9v97gt2cUREGXSOJ7Kz19oOGSLoMCyDpIf6ni0vfUxife1kHJ54rtcuy7NfS1TFDbOj3HusNz6URbZDK002kPsKN77');
+
 
 function App() {
 
   const history = useHistory()
   const {data, isLoading, isSuccess, isError, error} = useAutoLogInQuery()
+
+  if(isSuccess) console.log('user', data)
+
+
+    const appearance = {
+      theme: 'stripe',
+  };
+  
 
   if(isError){
     return(
@@ -80,16 +95,16 @@ function App() {
           <NavBar />
           <Container className="col-md-8 col-lg-6 col-sm-10">
           <Switch>
-            <Route exact path='/'>
+            {/* <Route exact path='/'>
               <LandingPage />
-            </Route>
+            </Route> */}
             {/* <Route exact path="/signin">
               <SignInComponent />
             </Route>*/}
             <Route exact path="/signup">
               <SignUpComponent />
             </Route> 
-            <Route exact path="/home">
+            <Route exact path="/">
               <Home />
             </Route>
             <Route path='/timer'>
@@ -98,7 +113,7 @@ function App() {
             <Route path='/test'>
               <Flow />
             </Route>
-            <Route path='/checkout'>
+            <Route exact path='/checkout'>
               <CheckoutPage />
             </Route>
             <Route path='/upgrade'>
@@ -115,6 +130,11 @@ function App() {
             </Route>
             <Route path='/profile'>
               <UserProfile />
+            </Route>
+            <Route exact path='/confirmation'>
+              <Elements stripe={stripePromise}>
+                <CheckoutConfirmation />
+              </Elements>
             </Route>
           </Switch> 
         {/* </Elements> */}

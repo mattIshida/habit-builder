@@ -11,7 +11,7 @@ function BrowseReaders(){
     let content
 
     if(isSuccess){
-
+        console.log('reader', readers)
         const readerCards = readers.map(readerObj => 
             <Col md={6} xl={4} className='my-3'>
             <ReaderCard key={readerObj.id} reader={readerObj}/>

@@ -25,7 +25,7 @@ function UserCardProfile(){
                 <div>Points: {user.points} </div>
                 <div>Streak: {user.streak}</div>
             </Card.Text>
-            <Button onClick={handleClickEdit}>Edit Profile</Button>
+            {/* <Button onClick={handleClickEdit}>Edit Profile</Button> */}
             <Container className='mt-1'><Button onClick={()=> {history.push('/readers')}}>Add friends</Button>
             </Container>
             </Card.Body>

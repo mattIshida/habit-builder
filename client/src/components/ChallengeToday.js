@@ -10,7 +10,12 @@ function ChallengeToday(){
     // console.log('attempts', attempts)
     
     if(isSuccess){
-        const attempt = attempts.find(a => Date.parse(a.start_time) < Date.now() & Date.now() < Date.parse(a.end_time))
+        const attempt = attempts.find(a => Date.parse(a.start_time) < Date.now() && Date.now() < Date.parse(a.end_time))
+        console.log('attempts', attempts)
+        console.log('attempt', attempt)
+        console.log(Date.parse(attempts[0].start_time))
+        console.log(Date.now())
+        console.log(Date.parse(attempts[0].end_time))
         const length = attempt.challenge.length
 
         const wait = (Date.parse(attempt.end_time)-Date.now())/(60.0*60*1000)

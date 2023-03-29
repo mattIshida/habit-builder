@@ -9,6 +9,9 @@ import { useHistory } from "react-router-dom";
 import ChallengeToday from "./ChallengeToday";
 import ChallengeFuture from "./ChallengeFuture";
 import IntentionForm from "./IntentionForm";
+import TipForm from "./TipForm";
+import IntentionDetail from "./IntentionDetail";
+import TipListFlow from "./TipListFlow"
 
 function ChallengePage(){
     
@@ -38,20 +41,20 @@ function ChallengePage(){
             break;
         case 'startTimer':
             content = (
-                <Card>
+                <Container>
                     <Timer />
                     <Button value='reportingCard' onClick={handleClick}>Simulate timer expiring</Button>
-                </Card>
+                </Container>
             )
             break;
         case 'reportingCard':
             content = (
-                <Card>
+                <Container>
                     <ReportingButtons />
-                    <Card.Text>Were you successful?</Card.Text>
-                    <Button value='reportSuccess' onClick={handleClick}>Yes!</Button>
-                    <Button value='reportFail' onClick={handleClick}>No</Button>
-                </Card>
+                    {/* <Card.Text>Were you successful?</Card.Text> */}
+                    {/* <Button value='reportSuccess' onClick={handleClick}>Yes!</Button> */}
+                    {/* <Button value='reportFail' onClick={handleClick}>No</Button> */}
+                </Container>
             )
             break
         case 'reportSuccess':
@@ -59,7 +62,7 @@ function ChallengePage(){
                 <Card>
                     <Card.Text>Congratulations!</Card.Text>
                     <ChallengeFuture />
-                    <Card.Text>Tomorrow's challenge: read for x minutes</Card.Text>
+                    {/* <Card.Text>Tomorrow's challenge: read for x minutes</Card.Text> */}
                     <Button value='postIntention' onClick={handleClick}>Post an intention</Button>
                     <Button value='shareTip' onClick={handleClick}>Share a tip</Button>
                     <Button value='' onClick={handleClick}>Done</Button>
@@ -80,15 +83,15 @@ function ChallengePage(){
                 <Container className="postIntention">
                     <h2>Post an Intention</h2>
                     <IntentionForm className="intentionForm"/>
-                    <Button value='submittedIntention' onClick={handleClick}>Done</Button>
-                    <Button value='' onClick={handleClick}>Cancel</Button>
+                    {/* <Button value='submittedIntention' onClick={handleClick}>Done</Button> */}
+                    <Button className='mt-3' value='' onClick={handleClick}>Cancel</Button>
                 </Container>
             )
             break;
         case 'shareTip':
             content = (
                 <Card>
-                    A form for sharing a tip
+                    <TipForm />
                     <Button value='sharedTip' onClick={handleClick}>Done</Button>
                     <Button value='' onClick={handleClick}>Cancel</Button>
                 </Card>
@@ -96,17 +99,62 @@ function ChallengePage(){
             break;
         case 'submittedIntention':
             content = (
-                <Card>
-                    You posted an intention
-                    <Button onClick={()=> history.push("/feed")}>My feed</Button>
-                </Card>
+                <Container>
+                    <Card>
+                        <Card.Body>
+                            <Card.Text>
+                                Intention posted! +10 points
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Button value='' onClick={handleClick}>Done</Button>
+                    {/* <Button onClick={()=> history.push("/feed")}>My feed</Button> */}
+                </Container>
             )
             break;
+
+        case 'submittedTip':
+            content = (
+                <Container>
+                    <Card>
+                        <Card.Body>
+                            <Card.Text>
+                                Tip submitted!
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Button value='' onClick={handleClick}>Done</Button>
+                    {/* <Button onClick={()=> history.push("/feed")}>My feed</Button> */}
+                </Container>
+            )
+            break;
+            
         case 'sharedTip' :
             content = (
                 <Card>
-                    You shared a tip
+                    <Card.Body>
+                        <Card.Text>
+                            You shared a tip!
+                        </Card.Text>
+                    </Card.Body>
+                    <Button value="" onClick={handleClick}>Done</Button>
                 </Card>
+            )
+            break;
+        case 'viewIntention':
+            content = (
+                <Container>
+                    <IntentionDetail />
+                    <Button value="" onClick={handleClick}>Done</Button>
+                </Container>
+            )
+            break;
+        case 'viewTips':
+            content = (
+                <Container>
+                    <TipListFlow />
+                    <Button value="" onClick={handleClick}>Done</Button>
+                </Container>
             )
     }
 

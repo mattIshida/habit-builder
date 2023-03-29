@@ -1,6 +1,6 @@
 import { useGetAttemptsQuery, useReportAttemptMutation } from "../app/services/userAPI";
 import SpinnerLoading from "./SpinnerLoading";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { updateFlow } from "../features/flowSlice";
 
@@ -22,11 +22,15 @@ function ReportingButtons(){
         }
 
         content = (
-            <div>
-                <h4>Were you successful?</h4>
-                <Button value='success' onClick={handleClickReport}>Yes</Button>
+            <Card>
+                <Card.Body>
+
+                
+                <Card.Text>Were you successful?</Card.Text>
+                <Button className='mx-3' value='success' onClick={handleClickReport}>Yes</Button>
                 <Button value='redo' onClick={handleClickReport}>No</Button>
-            </div>
+                </Card.Body>
+            </Card>
         )   
     } else content = <SpinnerLoading />
 

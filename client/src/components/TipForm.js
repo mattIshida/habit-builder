@@ -1,18 +1,18 @@
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
-import { useAutoLogInQuery, useGetAttemptsQuery, usePostIntentionMutation } from '../app/services/userAPI'
-import { useDispatch } from 'react-redux'
+import { useAutoLogInQuery, useGetAttemptsQuery, usePostTipMutation } from '../app/services/userAPI'
 import { updateFlow } from '../features/flowSlice'
+import { useDispatch } from 'react-redux'
 
-const initialFormData = {where: "", what: "", when: ""}
+const initialFormData = {text: "", image: ""}
 
-function IntentionForm(){
+function TipForm(){
 
     const [formData, setFormData] = useState(initialFormData)
     const {data: user, isSuccess} = useAutoLogInQuery()
     const {data: attempts, isSuccess: attemptsIsSuccess} = useGetAttemptsQuery()
-    const [postIntention, {isSuccess: isSuccessPost}] = usePostIntentionMutation()
+    const [postTip, {isSuccess: isSuccessPost}] = usePostTipMutation()
     const dispatch = useDispatch()
 
     function handleFormChange(e){
@@ -24,20 +24,20 @@ function IntentionForm(){
 
     function handleFormSubmit(e){
         e.preventDefault()
-        postIntention(formData)
+        postTip(formData)
     }
 
-    if(isSuccessPost) dispatch(updateFlow('submittedIntention'))
+    if(isSuccessPost) dispatch(updateFlow('submittedTip'))
 
     return(
         <div className="intentionForm">
             <Form onSubmit={handleFormSubmit}>
                 <Form.Group className="mb-3" >
-                    <Form.Label>Where will you read?</Form.Label>
-                    <Form.Control type="username" placeholder="on the bus, the couch, etc." name="where" value={formData.where} onChange={handleFormChange}/>
+                    <Form.Label>What helped you complete this challenge?</Form.Label>
+                    <Form.Control type="username" placeholder="finding a quiet place, e.g." name="text" value={formData.text} onChange={handleFormChange}/>
                 </Form.Group>
 
-                <Form.Group className="mb-3" >
+                {/* <Form.Group className="mb-3" >
                     <Form.Label>What will you read?</Form.Label>
                     <Form.Control type="username" placeholder="Middlemarch, Carrie, etc." name="what" value={formData.what} onChange={handleFormChange}/>
                 </Form.Group>
@@ -45,7 +45,7 @@ function IntentionForm(){
                 <Form.Group className="mb-3" >
                     <Form.Label>When will you read?</Form.Label>
                     <Form.Control type="username" placeholder="8am, after dinner, etc." name="when" value={formData.when} onChange={handleFormChange}/>
-                </Form.Group>
+                </Form.Group> */}
 
                 {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Post to my public feed" />
@@ -59,4 +59,4 @@ function IntentionForm(){
     )
 }
 
-export default IntentionForm;
+export default TipForm;

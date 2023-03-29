@@ -9,6 +9,7 @@ class GoogleAuthController < ApplicationController
     skip_before_action :authorize, only: [:login_url, :callback] 
 
     def login_url
+        #redirect_to client.authorization_uri.to_s, allow_other_host: true
         render json:  {auth_url: client.authorization_uri.to_s} #, allow_other_host: true
       end
     
@@ -18,7 +19,7 @@ class GoogleAuthController < ApplicationController
         client.fetch_access_token!
         puts "client=", client
         
-        token_store = Google::Auth::Stores::RedisTokenStore.new(redis: Redis.new)
+        # token_store = Google::Auth::Stores::RedisTokenStore.new(redis: Redis.new)
 
         calendar = Google::Apis::CalendarV3::CalendarService.new
         calendar.authorization = client
@@ -32,7 +33,7 @@ class GoogleAuthController < ApplicationController
         #user_name = payload['name']
         
         google_info = userInfo.get_userinfo_v2
-        byebug
+        
         # 
         user = User.find_by(provider: payload["iss"], provider_id: google_info.id)
         if user&.valid? 
