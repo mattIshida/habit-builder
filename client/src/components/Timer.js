@@ -54,7 +54,7 @@ function Timer(){
             <>
                 {/* <Button onClick={handleButtonClick} disabled={disabled}>{active ? 'Pause' : 'Start'}</Button> */}
                 <Button onClick={handleButtonClick} >{active ? 'Pause' : 'Start'}</Button>
-                <Button onClick={()=>{dispatch(resetTimer())}}>Reset</Button>
+                {/* <Button onClick={()=>{dispatch(resetTimer())}}>Reset</Button> */}
             </>
         </Card>
     )

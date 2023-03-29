@@ -41,6 +41,7 @@ export const userApi = createApi({
                     try {
                         await queryFulfilled
                         dispatch(userApi.util.resetApiState())
+                        window.location.reload();
                     } catch {
                         dispatch(userApi.util.invalidateTags(['User']))
                         // dispatch(userApi.util.resetApiState())
@@ -63,13 +64,20 @@ export const userApi = createApi({
                 }),
                 providesTags: ['Attempt']
             }),
+            getAttemptDetail: builder.query({
+                query: ()=> ({
+                    url: `/attemptDetail`,
+                    method: "GET"
+                }),
+                providesTags: ['AttemptDetail']
+            }),
             postIntention: builder.mutation({
                 query: (formData) => ({
                     url: '/intentions',
                     method: 'POST',
                     body: formData
                 }),
-                invalidatesTags: ['Intention', 'User', 'Attempts']
+                invalidatesTags: ['Intention', 'User', 'Attempt']
             }),
             getTips: builder.query({
                 query: (challenge_id) => ({
@@ -77,6 +85,14 @@ export const userApi = createApi({
                     method: 'GET',
                 }),
                 providesTags: ['Tips']
+            }),
+            postTip: builder.mutation({
+                query: (formData) => ({
+                    url: `/tips`,
+                    method: 'POST',
+                    body: formData
+                }),
+                invalidatesTags: ['Tips']
             }),
             getReaders: builder.query({
                 query: () => ({
@@ -98,7 +114,23 @@ export const userApi = createApi({
                     method: 'POST',
                     body: followObj
                 }),
-                invalidatesTags: ['Follows']
+                invalidatesTags: ['Follows', 'User']
+            }),
+            deleteFollow: builder.mutation({
+                query: (id) => ({
+                    url: `/follows/${id}`,
+                    method: 'DELETE'
+                }),
+                async onQueryStarted(_, {dispatch, queryFulfilled}) {
+                    try {
+                        await queryFulfilled
+                        dispatch(userApi.util.invalidateTags(['User']))
+                    } catch {
+                        dispatch(userApi.util.invalidateTags(['User']))
+                        // dispatch(userApi.util.resetApiState())
+                    }
+                }
+                // invalidateTags: ['Follows', 'User']
             }),
             getFeed: builder.query({
                 query: () => ({
@@ -127,11 +159,14 @@ export const {
     useLogOutMutation, 
     useReportAttemptMutation,
     useGetAttemptsQuery,
+    useGetAttemptDetailQuery, 
     usePostIntentionMutation,
     useGetTipsQuery,
+    usePostTipMutation, 
     useGetReadersQuery,
     useGetReaderProfileQuery,
     usePostFollowMutation,
+    useDeleteFollowMutation,
     useGetFeedQuery,
     usePostBookmarkMutation
 } = userApi

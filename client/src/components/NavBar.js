@@ -24,7 +24,7 @@ function NavBar() {
         logOut()
         // refetch()
         // dispatch(clearUser())
-        // history.push('/')
+        history.push('/')
     }
 
     //if(isErrorUser) return <NavBarStatic />

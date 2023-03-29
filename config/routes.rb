@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   get '/google_auth/login_url'#, to: "googleAuth#login"
   get '/google_auth/callback'#, to: "googleAuth#callback"
 
+  get '/attemptDetail', to: 'attempts#detail'
+
 end
