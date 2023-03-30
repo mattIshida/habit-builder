@@ -4,7 +4,7 @@ function TipList( { items }){
 
     let itemCards
 
-    if(items.length === 0) itemCards = null
+    if(items.length === 0) itemCards = <p>No tips have been submitted for this challenge...</p>
 
     function formatDate(str){
         const date = new Date(Date.parse(str))
@@ -28,6 +28,7 @@ function TipList( { items }){
             </Card>
         )
     })
+    
 
     return(
         <div>

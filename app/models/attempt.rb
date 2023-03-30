@@ -3,6 +3,7 @@ class Attempt < ApplicationRecord
   belongs_to :challenge
   has_many :intentions, dependent: :destroy
   has_one :tip, dependent: :destroy
+  has_many :helper_tips, through: :challenge, source: :tips
 
   def expire_and_new 
     self.update(active: false, current: false)

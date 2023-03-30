@@ -5,6 +5,8 @@ import {
     useStripe,
     useElements
   } from "@stripe/react-stripe-js";
+import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 
 function CheckoutConfirmation(){
@@ -15,6 +17,7 @@ function CheckoutConfirmation(){
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const history = useHistory()
 
     useEffect(() => {
         if (!stripe) {
@@ -32,7 +35,7 @@ function CheckoutConfirmation(){
         stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
         switch (paymentIntent.status) {
             case "succeeded":
-            setMessage("Payment succeeded!");
+            setMessage("Payment succeeded! Welcome to HabitBuilder Premium");
             break;
             case "processing":
             setMessage("Your payment is processing.");
@@ -49,6 +52,7 @@ function CheckoutConfirmation(){
     console.log('message', message)
     return <>
         <h2>{message}</h2>
+        <Button className='mt-3' onClick={()=> history.push('/')}>Done</Button>
     </>
 }
 export default CheckoutConfirmation;
