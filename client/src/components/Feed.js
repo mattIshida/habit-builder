@@ -11,8 +11,9 @@ function Feed(){
 
     if(isSuccess){
         
-        const feedCards = feed.slice().sort((a,b)=>b.content.updated_at.localeCompare(a.content.updated_at)).map(item => <FeedCard key={`${item.type}-${item.content.id}`} item={item} />)
+        const feedCards = feed.filter(x=> !(x.type=='attempt' && x.content.success===null)).sort((a,b)=>b.content.updated_at.localeCompare(a.content.updated_at)).map(item => <FeedCard key={`${item.type}-${item.content.id}`} item={item} />)
         content = feedCards
+        if (content.length ===0) content = <p className='mt-3'>Nothing here yet. Attempt a challenge to get started.</p>
     }
     
     return(

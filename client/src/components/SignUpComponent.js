@@ -58,9 +58,9 @@ function SignUpComponent(){
             {/* <a href='/google_auth/login'>Sign in with Google</a> */}
             {/* <Button onClick={handleClick}>Sign in with google</Button> */}
             {authUrl ? (
-                <a href={authUrl}>Sign in with Google</a>
+                <Button className='mt-3'variant="success" href={authUrl}>Click to continue with Google</Button>
             ) : (
-                <button onClick={handleSignIn}>Sign in with Google</button>
+                <Button className='mt-3' onClick={handleSignIn}>Sign in with Google</Button>
             )}
         </Container>
     )
