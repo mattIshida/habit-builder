@@ -30,10 +30,8 @@ function ChallengePage(){
                 <>                
                     
                     <ChallengeCardMain/>
-                    <div>
-                        <ButtonGroup>
+                    <div >
                         <Button className='mt-3' variant="outline-dark" value='startTimer' onClick={handleClick}>Test Attempt</Button>
-                        </ButtonGroup>
                     </div>
                 </>
 
@@ -61,7 +59,7 @@ function ChallengePage(){
             content = (
                 <Card>
                     <Card.Body>
-                    <Card.Text>Congratulations!</Card.Text>
+                    <Card.Text>Congratulations! +10 points</Card.Text>
                     <ChallengeFuture />
                     {/* <Card.Text>Tomorrow's challenge: read for x minutes</Card.Text> */}
                     {/* <Button value='postIntention' onClick={handleClick}>Post an intention</Button> */}
@@ -107,7 +105,7 @@ function ChallengePage(){
                     <Card>
                         <Card.Body>
                             <Card.Text>
-                                Intention posted! +10 points
+                                Intention posted! +5 points
                             </Card.Text>
                         </Card.Body>
                     </Card>

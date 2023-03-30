@@ -52,16 +52,16 @@ function NavBar() {
                 {/* <Nav.Link href="/upgrade">Upgrade</Nav.Link> */}
                 {/* <Nav.Link href="/share">Share</Nav.Link> */}
                 {/* <Nav.Link href="/readers">Browse</Nav.Link> */}
-                <Nav.Link href="/feed">Feed</Nav.Link>
+                <Nav.Link href="/">Home</Nav.Link>
             </Nav>
             
 
             <Navbar.Collapse id="navbar-dark-example" className="justify-content-end">
             {isSuccessUser ? <>
-                <Navbar.Text className="mx-3">
+                <Navbar.Text className="mx-3 navbarPoints">
                         {`Points: ${user.points}`}
                 </Navbar.Text>
-                <Navbar.Text className="mx-3">
+                <Navbar.Text className="mx-3 navbarPoints">
                         {`Streak: ${user.streak}`}
                 </Navbar.Text>
             </>: null}
@@ -72,7 +72,8 @@ function NavBar() {
                 menuVariant="dark"
                 >
                 
-                
+                <NavDropdown.Item href="/feed">Feed</NavDropdown.Item>
+
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 {user.tier == 0 ? <NavDropdown.Item href="/upgrade">
                     Upgrade

@@ -1,4 +1,4 @@
-import { Card } from 'react-bootstrap'
+import { Card, Container } from 'react-bootstrap'
 import AttemptCard from './AttemptCard'
 import IntentionCard from './IntentionCard'
 import TipCard from './TipCard'
@@ -25,9 +25,11 @@ function FeedCard({ item }){
 
     content = <Card className="my-3">
         <Card.Header>
+            <Container className='d-flex justify-content-between'>
             {`${item.reader.username} ${options.verbText}`}
             
-            {formatDate(item.content.updated_at)}
+            <div style={{textAlign: "right", fontSize: '.8rem'}}>{formatDate(item.content.updated_at)}</div>
+            </Container>
         </Card.Header>
         <Card.Body>
             {`${options.primaryText}`}
