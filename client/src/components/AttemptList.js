@@ -18,7 +18,7 @@ function AttemptList( { items }){
         return date.toLocaleDateString(options)
     }
 
-    itemCards = items?.slice().sort((a,b)=>b.updated_at.localeCompare(a.updated_at)).map(item => {
+    itemCards = items?.slice().filter(i => i.success !== null).sort((a,b)=>b.updated_at.localeCompare(a.updated_at)).map(item => {
         return(
             // <ListGroupItem key={item.id}>
             //     {`At ${formatTime(item.updated_at)} READERNAME attempted a challenge`}

@@ -32,7 +32,7 @@ function ChallengePage(){
                     <ChallengeCardMain/>
                     <div>
                         <ButtonGroup>
-                        <Button value='startTimer' onClick={handleClick}>Test Attempt</Button>
+                        <Button className='mt-3' variant="outline-dark" value='startTimer' onClick={handleClick}>Test Attempt</Button>
                         </ButtonGroup>
                     </div>
                 </>
@@ -43,7 +43,7 @@ function ChallengePage(){
             content = (
                 <Container>
                     <Timer />
-                    <Button value='reportingCard' onClick={handleClick}>Simulate timer expiring</Button>
+                    <Button className='m-3' variant="outline-dark" value='reportingCard' onClick={handleClick}>Simulate timer expiring</Button>
                 </Container>
             )
             break;
@@ -60,21 +60,25 @@ function ChallengePage(){
         case 'reportSuccess':
             content = (
                 <Card>
+                    <Card.Body>
                     <Card.Text>Congratulations!</Card.Text>
                     <ChallengeFuture />
                     {/* <Card.Text>Tomorrow's challenge: read for x minutes</Card.Text> */}
-                    <Button value='postIntention' onClick={handleClick}>Post an intention</Button>
+                    {/* <Button value='postIntention' onClick={handleClick}>Post an intention</Button> */}
                     <Button value='shareTip' onClick={handleClick}>Share a tip</Button>
                     <Button value='' onClick={handleClick}>Done</Button>
+                    </Card.Body>
                 </Card>
             )
             break
         case 'reportFail':
             content = (
                 <Card>
+                    <Card.Body>
                     <Card.Text>Don't worry about! Set an intention for tomorrow's challenge or view tips for this challenge</Card.Text>
                     <Button value='postIntention' onClick={handleClick}>Post an intention</Button>
                     <Button value='viewTips' onClick={handleClick}>View tips for this challenge</Button>
+                    </Card.Body>
                 </Card>
             )
             break;

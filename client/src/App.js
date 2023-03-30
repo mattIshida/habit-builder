@@ -67,7 +67,14 @@ function App() {
                       <Container>
                       <Carousel fade interval={null}>
                         <CarouselItem className="aboutCarouselItem">
-                            <p>lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                            <h2>An opinionated habit tracker focused on consistent, small wins</h2>
+                            <ul>
+                                <li>Receive a daily reading challenge</li>
+                                <li>Time yourself from within the app</li>
+                                <li>Earn points for completing challenges</li>
+                                <li>Partner with others for social accountability</li>
+                                <li>Post intentions to help stack a new habit onto existig ones</li>
+                            </ul>
                         </CarouselItem>
                         <CarouselItem className="aboutCarouselItem">
                           Item 2

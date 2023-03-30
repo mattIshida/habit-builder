@@ -13,8 +13,10 @@ function CartDisplay({ amount }){
 
     if(cart){
         content = <Card className="my-3">
-            <Card.Title>Cart</Card.Title>
-            <Card.Text>{`${capitalize(cart)} subscription: $${amount/100}`}</Card.Text>
+            <Card.Body>
+                <Card.Title>Cart</Card.Title>
+                <Card.Text>{`${capitalize(cart)} subscription: $${amount/100}`}</Card.Text>
+            </Card.Body>
         </Card>
     }
     

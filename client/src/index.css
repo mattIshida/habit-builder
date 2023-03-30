@@ -99,8 +99,9 @@ button {
 }
 
 .aboutCarouselItem {
-  background-color: red;
+  /* background-color: red; */
   font-family: 'Montserrat';
+  font-size: '2rem';
   color: #f0f0f0;
   height: 75vh;
 
