@@ -9,8 +9,8 @@ class Attempt < ApplicationRecord
     self.update(active: false, current: false)
     challenge = self.success ? self.challenge.next_challenge : self.challenge 
     now = Time.now
-    start_time = Time.new(now.year, now.month, now.day+1, nil, nil, nil, self.user.utc_offset*60)
-    end_time = Time.new(now.year, now.month, now.day+2, nil, nil, nil, self.user.utc_offset*60)
+    start_time = now.end_of_day#Time.new(now.year, now.month, now.day+1, nil, nil, nil, self.user.utc_offset*60)
+    end_time = start_time + 1.day #Time.new(now.year, now.month, now.day+2, nil, nil, nil, self.user.utc_offset*60)
     Attempt.create(user: self.user, challenge: challenge, current: true, active: false, success: nil, start_time: start_time, end_time: end_time)
   end
 

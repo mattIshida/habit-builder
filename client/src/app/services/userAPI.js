@@ -77,7 +77,7 @@ export const userApi = createApi({
                     method: 'POST',
                     body: formData
                 }),
-                invalidatesTags: ['Intention', 'User', 'Attempt']
+                invalidatesTags: ['Intention', 'User', 'Attempt', 'Profile', 'Feed']
             }),
             getTips: builder.query({
                 query: (challenge_id) => ({
@@ -92,7 +92,7 @@ export const userApi = createApi({
                     method: 'POST',
                     body: formData
                 }),
-                invalidatesTags: ['Tips']
+                invalidatesTags: ['Tips', 'User', 'Feed']
             }),
             getReaders: builder.query({
                 query: () => ({

@@ -7,15 +7,31 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.destroy_all
+Attempt.destroy_all
 Follow.destroy_all
 Challenge.destroy_all
+Intention.destroy_all
+Tip.destroy_all
+Bookmark.destroy_all
 
 puts "Seeding users..."
 20.times do
     user = Faker::Internet.user('username', 'email')
     User.create(
         username: user[:username], 
-        password: "Password123!",
+        password: "demo",
+        email: user[:email],
+        image: Faker::Avatar.image,
+        challenge: (1..10).to_a.sample,
+        challenge_set: 1
+    )
+end
+
+['alice', 'bob', 'carl'].each do |u|
+    user = Faker::Internet.user('username', 'email')
+    User.create(
+        username: u, 
+        password: "demo",
         email: user[:email],
         image: Faker::Avatar.image,
         challenge: (1..10).to_a.sample,
@@ -89,6 +105,10 @@ User.all.each do |u|
             updated_at: a.start_time + 5.hours
         )
     end
+end
+
+Attempt.all.each do |a|
+    a.update(success: nil) if a.current==true
 end
 
 

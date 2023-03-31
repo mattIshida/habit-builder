@@ -64,7 +64,7 @@ function ChallengePage(){
                     {/* <Card.Text>Tomorrow's challenge: read for x minutes</Card.Text> */}
                     {/* <Button value='postIntention' onClick={handleClick}>Post an intention</Button> */}
                     <Button value='shareTip' onClick={handleClick}>Share a tip</Button>
-                    <Button value='' onClick={handleClick}>Done</Button>
+                    <Button className='mx-3' value='' onClick={handleClick}>Done</Button>
                     </Card.Body>
                 </Card>
             )
@@ -75,7 +75,7 @@ function ChallengePage(){
                     <Card.Body>
                     <Card.Text>Don't worry about! Set an intention for tomorrow's challenge or view tips for this challenge</Card.Text>
                     <Button value='postIntention' onClick={handleClick}>Post an intention</Button>
-                    <Button value='viewTips' onClick={handleClick}>View tips for this challenge</Button>
+                    <Button className= 'my-3' value='viewTips' onClick={handleClick}>View tips for this challenge</Button>
                     </Card.Body>
                 </Card>
             )
@@ -94,8 +94,8 @@ function ChallengePage(){
             content = (
                 <Card>
                     <TipForm />
-                    <Button value='sharedTip' onClick={handleClick}>Done</Button>
-                    <Button value='' onClick={handleClick}>Cancel</Button>
+                    <Button className='mt-3'value='sharedTip' onClick={handleClick}>Done</Button>
+                    <Button className='my-3' value='' onClick={handleClick}>Cancel</Button>
                 </Card>
             )
             break;
@@ -109,7 +109,7 @@ function ChallengePage(){
                             </Card.Text>
                         </Card.Body>
                     </Card>
-                    <Button value='' onClick={handleClick}>Done</Button>
+                    <Button className='my-3' value='' onClick={handleClick}>Done</Button>
                     {/* <Button onClick={()=> history.push("/feed")}>My feed</Button> */}
                 </Container>
             )
